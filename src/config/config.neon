@@ -2,3 +2,9 @@ services:
 	moduleManager:
 		setup:
 			- addModule(Crm\MobiletechModule\MobiletechModule())
+
+	# Authentication
+	- Crm\MobiletechModule\Authenticator\MobiletechAuthenticator
+
+	# Repositories
+	- Crm\MobiletechModule\Repository\MobiletechPhoneNumbersRepository
