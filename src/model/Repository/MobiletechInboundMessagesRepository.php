@@ -41,7 +41,7 @@ class MobiletechInboundMessagesRepository extends Repository
 
     public function findByMobiletechId($mobiletechId)
     {
-        return $this->getTable()->where(['mobiletech_id' => $mobiletechId])->fetch();
+        return $this->findBy('mobiletech_id', $mobiletechId);
     }
 
     public function update(IRow &$row, $data)
