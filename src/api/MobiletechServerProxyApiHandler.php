@@ -1,0 +1,58 @@
+<?php
+
+namespace Crm\MobiletechModule\Api;
+
+use Crm\ApiModule\Api\ApiHandler;
+use Crm\ApiModule\Authorization\ApiAuthorizationInterface;
+use Crm\ApiModule\Token\InternalToken;
+use Crm\ApplicationModule\Config\ApplicationConfig;
+use Crm\MobiletechModule\Config;
+use GuzzleHttp\Client;
+
+/**
+ * Mobiletech only allows whitelisted set of IPs to make a request to SMS gateway. To circumvent this limitation
+ * during development, send your request to this API on production environment. It forwards the request to the
+ * testing gateway and returns back the response.
+ */
+class MobiletechServerProxyApiHandler extends ApiHandler
+{
+    private $applicationConfig;
+
+    public function __construct(ApplicationConfig $applicationConfig)
+    {
+        $this->applicationConfig = $applicationConfig;
+    }
+
+    public function params()
+    {
+        return [];
+    }
+
+    public function handle(ApiAuthorizationInterface $authorization)
+    {
+        $rawXmlPayload = file_get_contents('php://input');
+
+        $url = $this->applicationConfig->get(Config::GATEWAY_URL_TEST);
+        if (!$url) {
+            throw new \Exception('cannot use API endpoint, missing configuration option: ' . Config::GATEWAY_URL_TEST);
+        }
+        $internalApiToken = $this->applicationConfig->get(InternalToken::CONFIG_NAME);
+        if (!$internalApiToken) {
+            throw new \Exception('cannot use API endpoint, missing configuration option: ' . InternalToken::CONFIG_NAME);
+        }
+
+        $client = new Client([
+            'timeout' => 5,
+            'headers' => [
+                'Content-Type' => 'text/xml; charset=UTF8',
+                'Authorization' => 'Bearer ' . $internalApiToken,
+            ],
+        ]);
+
+        $response = $client->request('POST', $url, [
+            'body' => $rawXmlPayload,
+        ]);
+
+        return $response;
+    }
+}
