@@ -43,16 +43,18 @@ class MobiletechServerProxyApiHandler extends ApiHandler
 
         $client = new Client([
             'timeout' => 5,
+            'verify' => false,
             'headers' => [
                 'Content-Type' => 'text/xml; charset=UTF8',
                 'Authorization' => 'Bearer ' . $internalApiToken,
             ],
         ]);
 
-        $response = $client->request('POST', $url, [
+        $result = $client->request('POST', $url, [
             'body' => $rawXmlPayload,
         ]);
 
-        return $response;
+        echo $result->getBody()->getContents();
+        exit;
     }
 }
