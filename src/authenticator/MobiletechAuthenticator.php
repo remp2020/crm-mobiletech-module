@@ -83,6 +83,9 @@ class MobiletechAuthenticator implements AuthenticatorInterface
         return $user;
     }
 
+    /**
+     * Validate and sanitize slovak phone number. Finds number also in SME emails (09XXXXXXXX@post.sk).
+     */
     private function sanitizeSlovakMobilePhoneNumber(string $phoneNumber): ?string
     {
         // remove spaces
