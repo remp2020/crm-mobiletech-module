@@ -5,37 +5,39 @@ namespace Crm\MobiletechModule\Repository;
 use Crm\ApplicationModule\Repository;
 use Nette\Database\Table\IRow;
 
-class MobiletechInboundMessagesRepository extends Repository
+class MobiletechOutboundMessagesRepository extends Repository
 {
-    protected $tableName = 'mobiletech_inbound_messages';
+    protected $tableName = 'mobiletech_outbound_messages';
 
     public function add(
-        ?IRow $user,
+        IRow $user,
         string $mobiletechId,
+        IRow $mobiletechTemplate,
         string $servId,
         string $projectId,
         string $from,
         string $to,
+        string $billKey,
         string $content,
         string $contentCoding,
         string $dcs,
         string $esm,
-        string $operatorType,
-        \DateTime $receiveDate
+        string $operatorType
     ) {
         return $this->insert([
-            'user_id' => $user->id ?? null,
+            'user_id' => $user->id,
             'mobiletech_id' => $mobiletechId,
+            'mobiletech_template_id' => $mobiletechTemplate->id,
             'serv_id' => $servId,
             'project_id' => $projectId,
             'from' => $from,
             'to' => $to,
+            'billkey' => $billKey,
             'content' => $content,
             'content_coding' => $contentCoding,
             'dcs' => $dcs,
             'esm' => $esm,
             'operator_type' => $operatorType,
-            'receive_date' => $receiveDate,
             'created_at' => new \DateTime(),
             'updated_at' => new \DateTime()
         ]);

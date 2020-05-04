@@ -3,6 +3,8 @@ services:
 		setup:
 			- addModule(Crm\MobiletechModule\MobiletechModule())
 
+	mobiletechApiClient: Crm\MobiletechModule\Model\MockApiClient
+
 	# Authentication
 	- Crm\MobiletechModule\Authenticator\MobiletechAuthenticator
 
@@ -10,9 +12,21 @@ services:
 	- Crm\MobiletechModule\Api\MobiletechWebhookApiHandler
 	- Crm\MobiletechModule\Api\MobiletechServerProxyApiHandler
 
+	# Commands
+	- Crm\MobiletechModule\Commands\TestNotificationCommand
+
+	# Events
+	- Crm\MobiletechModule\Events\NotificationHandler
+
+	# Hermes
+	- Crm\MobiletechModule\Hermes\SendHandler
+	mobiletechTestInboundHandler: Crm\MobiletechModule\Hermes\TestInboundHandler
+
 	# Repositories
 	- Crm\MobiletechModule\Repository\MobiletechPhoneNumbersRepository
 	- Crm\MobiletechModule\Repository\MobiletechInboundMessagesRepository
+	- Crm\MobiletechModule\Repository\MobiletechOutboundMessagesRepository
+	- Crm\MobiletechModule\Repository\MobiletechTemplatesRepository
 
 	# Seeders
 	- Crm\MobiletechModule\Seeders\ConfigsSeeder

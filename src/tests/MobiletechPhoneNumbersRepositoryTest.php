@@ -3,7 +3,7 @@
 namespace Crm\MobiletechModule\Tests;
 
 use Crm\ApplicationModule\Tests\DatabaseTestCase;
-use Crm\MobiletechModule\Repository\MobiletechPhoneNumberAlreadyExistsException;
+use Crm\MobiletechModule\Repository\MobiletechAlreadyExistsException;
 use Crm\MobiletechModule\Repository\MobiletechPhoneNumbersRepository;
 use Crm\UsersModule\Repository\UsersRepository;
 use Nette\Database\Table\ActiveRow;
@@ -65,7 +65,7 @@ class MobiletechPhoneNumbersRepositoryTest extends DatabaseTestCase
         $this->mobiletechPhoneNumbersRepository->add(self::PHONE_NUMBER, $this->user);
 
         // try to add second time
-        $this->expectException(MobiletechPhoneNumberAlreadyExistsException::class);
+        $this->expectException(MobiletechAlreadyExistsException::class);
         $this->mobiletechPhoneNumbersRepository->add(self::PHONE_NUMBER, $this->user);
     }
 

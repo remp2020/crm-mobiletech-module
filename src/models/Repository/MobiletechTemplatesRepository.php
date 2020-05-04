@@ -1,0 +1,38 @@
+<?php
+
+namespace Crm\MobiletechModule\Repository;
+
+use Crm\ApplicationModule\Repository;
+use Nette\Database\Table\IRow;
+use Nette\Database\UniqueConstraintViolationException;
+use Nette\Utils\DateTime;
+
+class MobiletechTemplatesRepository extends Repository
+{
+    protected $tableName = 'mobiletech_templates';
+
+    public function add(string $code, string $content): IRow
+    {
+        try {
+            return $this->insert([
+                'code' => $code,
+                'content' => $content,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+            ]);
+        } catch (UniqueConstraintViolationException $e) {
+            throw new MobiletechAlreadyExistsException('Mobiletech template already exists: ' . $code);
+        }
+    }
+
+    public function update(IRow &$row, $data)
+    {
+        $data['updated_at'] = new DateTime();
+        return parent::update($row, $data);
+    }
+
+    public function findByCode(string $code)
+    {
+        return $this->findBy('code', $code);
+    }
+}

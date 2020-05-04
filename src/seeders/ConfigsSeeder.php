@@ -68,5 +68,16 @@ class ConfigsSeeder implements ISeeder
             '',
             2501
         );
+
+        $this->addConfig(
+            $output,
+            $category,
+            Config::BILLKEY_FREE,
+            ApplicationConfig::TYPE_STRING,
+            'mobiletech.config.' . Config::BILLKEY_FREE . '.name',
+            'mobiletech.config.' . Config::BILLKEY_FREE . '.description',
+            '',
+            2501
+        );
     }
 }

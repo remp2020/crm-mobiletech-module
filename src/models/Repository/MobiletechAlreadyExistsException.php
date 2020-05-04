@@ -4,7 +4,7 @@ namespace Crm\MobiletechModule\Repository;
 
 use Nette\Database\UniqueConstraintViolationException;
 
-class MobiletechPhoneNumberAlreadyExistsException extends UniqueConstraintViolationException
+class MobiletechAlreadyExistsException extends UniqueConstraintViolationException
 {
 
 }
