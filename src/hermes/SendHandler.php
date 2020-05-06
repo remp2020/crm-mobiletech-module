@@ -94,7 +94,7 @@ class SendHandler implements HandlerInterface
         $rcvMsgId = $inboundMessage->mobiletech_id;
         $from = $inboundMessage->to; // intentional swap
         $to = $phoneNumber;
-        $content = $this->getContent($mobiletechTemplate->content, $payload['params']);
+        $content = $this->getContent($mobiletechTemplate->content, $payload['params'] ?? []);
         $operatorType = $inboundMessage->operator_type;
 
         $mobiletechOutbound = $this->mobiletechApiClient->send(
