@@ -55,7 +55,7 @@ class NotificationHandler extends AbstractListener
             $payload['mobiletech_inbound_message_id'] = $event->getMobiletechInboundMessage()->id;
             $payload['phone_number'] = $event->getMobiletechInboundMessage()->from;
             $payload['bill_key'] = $event->getBillKey();
-        } else if ($userId) {
+        } elseif ($userId) {
             // if there isn't a triggering message, find phone number based on the user settings
             $mobiletechPhoneNumber = $this->mobiletechPhoneNumbersRepository->findByUserId($userId);
             if (!$mobiletechPhoneNumber) {
