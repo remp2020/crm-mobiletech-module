@@ -21,6 +21,7 @@ services:
 	# Hermes
 	- Crm\MobiletechModule\Hermes\SendHandler
 	mobiletechTestInboundHandler: Crm\MobiletechModule\Hermes\TestInboundHandler
+	- Crm\MobiletechModule\Hermes\InboundHandler
 
 	# Repositories
 	- Crm\MobiletechModule\Repository\MobiletechPhoneNumbersRepository
@@ -30,3 +31,5 @@ services:
 
 	# Seeders
 	- Crm\MobiletechModule\Seeders\ConfigsSeeder
+
+	- Crm\MobiletechModule\Model\InboundSmsProcessor

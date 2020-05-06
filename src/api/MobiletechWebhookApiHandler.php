@@ -71,7 +71,7 @@ class MobiletechWebhookApiHandler extends ApiHandler
 
     public function handle(ApiAuthorizationInterface $authorization)
     {
-        $rawPayload = file_get_contents('php://input');
+        $rawPayload = $this->rawPayload();
         $payload = new \SimpleXMLElement($rawPayload);
 
         $command = $payload['command'][0] ?? null;

@@ -48,14 +48,13 @@ class SendHandler implements HandlerInterface
         }
 
         $userId = $payload['user_id'] ?? null;
-        if (!$userId) {
-            Debugger::log('Attempt to send Mobiletech message without user ID', ILogger::ERROR);
-            return false;
-        }
-        $user = $this->usersRepository->find($userId);
-        if (!$user) {
-            Debugger::log('Attempt to send Mobiletech message referencing user that does not exist: ' . $userId, ILogger::ERROR);
-            return false;
+
+        if ($userId) {
+            $user = $this->usersRepository->find($userId);
+            if (!$user) {
+                Debugger::log('Attempt to send Mobiletech message referencing user that does not exist: ' . $userId, ILogger::ERROR);
+                return false;
+            }
         }
 
         $phoneNumber = $payload['phone_number'] ?? null;

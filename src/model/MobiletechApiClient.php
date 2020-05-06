@@ -31,7 +31,7 @@ class MobiletechApiClient implements ApiClientInterface
     }
 
     public function send(
-        IRow $user,
+        ?IRow $user,
         IRow $mobiletechTemplate,
         string $servId,
         string $projectId,

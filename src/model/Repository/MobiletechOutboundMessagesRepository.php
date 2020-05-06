@@ -10,7 +10,7 @@ class MobiletechOutboundMessagesRepository extends Repository
     protected $tableName = 'mobiletech_outbound_messages';
 
     public function add(
-        IRow $user,
+        ?IRow $user,
         string $mobiletechId,
         IRow $mobiletechTemplate,
         string $servId,
@@ -25,7 +25,7 @@ class MobiletechOutboundMessagesRepository extends Repository
         string $operatorType
     ) {
         return $this->insert([
-            'user_id' => $user->id,
+            'user_id' => $user->id ?? null,
             'mobiletech_id' => $mobiletechId,
             'mobiletech_template_id' => $mobiletechTemplate->id,
             'serv_id' => $servId,

@@ -34,11 +34,8 @@ class NotificationHandler extends AbstractListener
             throw new \Exception("Unable to handle event, expected NotificationEvent");
         }
 
+        // Some notifications can be sent to unregistered users
         $userId = $event->getUser()->id ?? null;
-        if (!$userId) {
-            // return if event's user is instance of DataRow with incomplete set of attributes
-            return;
-        }
 
         $mobiletechTemplate = $this->mobiletechTemplatesRepository->findByCode($event->getTemplateCode());
         if (!$mobiletechTemplate) {
@@ -46,19 +43,19 @@ class NotificationHandler extends AbstractListener
             return;
         }
 
-        $payload = [
+        $payload = array_filter([
             'user_id' => $userId,
             'template_code' => $event->getTemplateCode(),
             'params' => $event->getParams(),
             'context' => $event->getContext(),
-        ];
+        ]);
 
         if ($event instanceof MobiletechNotificationEvent) {
             // if there is a triggering message, respond to sender's phone number and link inbound message
             $payload['mobiletech_inbound_message_id'] = $event->getMobiletechInboundMessage()->id;
             $payload['phone_number'] = $event->getMobiletechInboundMessage()->from;
             $payload['bill_key'] = $event->getBillKey();
-        } else {
+        } else if ($userId) {
             // if there isn't a triggering message, find phone number based on the user settings
             $mobiletechPhoneNumber = $this->mobiletechPhoneNumbersRepository->findByUserId($userId);
             if (!$mobiletechPhoneNumber) {
@@ -66,6 +63,8 @@ class NotificationHandler extends AbstractListener
                 return;
             }
             $payload['phone_number'] = $mobiletechPhoneNumber->phone_number;
+        } else {
+            return;
         }
 
         // making sure the number is in the right format

@@ -63,7 +63,7 @@ class MobiletechModule extends CrmModule
         );
         $dispatcher->registerHandler(
             'mobiletech-inbound',
-            $this->getInstance(\Crm\MobiletechModule\Hermes\TestInboundHandler::class)
+            $this->getInstance(\Crm\MobiletechModule\Hermes\InboundHandler::class)
         );
     }
 

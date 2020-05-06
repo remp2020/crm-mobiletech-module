@@ -20,7 +20,7 @@ class MobiletechNotificationEvent extends NotificationEvent
         Emitter $emitter,
         IRow $mobiletechInboundMessage,
         string $billKey,
-        IRow $user,
+        ?IRow $user,
         string $templateCode,
         array $params = [],
         string $context = null,
