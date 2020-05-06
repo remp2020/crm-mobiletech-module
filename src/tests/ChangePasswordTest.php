@@ -2,6 +2,7 @@
 
 namespace Crm\MobiletechModule\Tests;
 
+use Crm\ApiModule\Authorization\NoAuthorization;
 use Crm\MobiletechModule\Events\MobiletechNotificationEvent;
 use Crm\UsersModule\Auth\UserManager;
 use Nette\Database\Table\ActiveRow;
@@ -34,8 +35,8 @@ class ChangePasswordTest extends BaseTestCase
         $this->mobiletechPhoneNumbersRepository->add(self::PHONE_NUMBER, $this->user);
 
         $sms = $this->generateSms(self::PHONE_NUMBER, self::ENDPOINT_NUMBER, 'HESLO');
-        $this->mobiletechWebhookApiHandler->mockRawPayload($sms);
-        $response = $this->mobiletechWebhookApiHandler->handleInTest();
+        $this->mobiletechWebhookApiHandler->setRawPayload($sms);
+        $response = $this->mobiletechWebhookApiHandler->handle(new NoAuthorization());
         $this->assertEquals(Response::S200_OK, $response->getHttpCode());
 
         $this->dispatcher->handle(); // Handle 'mobiletech-inbound' by Hermes
@@ -53,8 +54,8 @@ class ChangePasswordTest extends BaseTestCase
     public function testChangePasswordForUnauthenticatedUser()
     {
         $sms = $this->generateSms(self::PHONE_NUMBER, self::ENDPOINT_NUMBER, 'HESLO');
-        $this->mobiletechWebhookApiHandler->mockRawPayload($sms);
-        $response = $this->mobiletechWebhookApiHandler->handleInTest();
+        $this->mobiletechWebhookApiHandler->setRawPayload($sms);
+        $response = $this->mobiletechWebhookApiHandler->handle(new NoAuthorization());
         $this->assertEquals(Response::S200_OK, $response->getHttpCode());
 
         $this->dispatcher->handle(); // Handle 'mobiletech-inbound' by Hermes
