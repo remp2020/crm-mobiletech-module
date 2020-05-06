@@ -48,6 +48,7 @@ class SendHandler implements HandlerInterface
         }
 
         $userId = $payload['user_id'] ?? null;
+        $user = null;
 
         if ($userId) {
             $user = $this->usersRepository->find($userId);
