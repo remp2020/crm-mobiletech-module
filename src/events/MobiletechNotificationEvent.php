@@ -19,7 +19,7 @@ class MobiletechNotificationEvent extends NotificationEvent
     public function __construct(
         Emitter $emitter,
         IRow $mobiletechInboundMessage,
-        string $billKey,
+        ?string $billKey,
         ?IRow $user,
         string $templateCode,
         array $params = [],
@@ -44,7 +44,7 @@ class MobiletechNotificationEvent extends NotificationEvent
         return $this->mobiletechInboundMessage;
     }
 
-    public function getBillKey(): string
+    public function getBillKey(): ?string
     {
         return $this->billKey;
     }

@@ -39,7 +39,7 @@ class InboundSmsProcessor
         $this->emitter->emit(new MobiletechNotificationEvent(
             $this->emitter,
             $inboundMessage,
-            '',
+            null,
             $inboundMessage->user,
             'mobiletech_unregistered_number',
             []
@@ -53,7 +53,7 @@ class InboundSmsProcessor
         $this->emitter->emit(new MobiletechNotificationEvent(
             $this->emitter,
             $inboundMessage,
-            '',
+            null,
             $inboundMessage->user,
             'mobiletech_reset_password_for_authenticated_user',
             [
