@@ -6,7 +6,7 @@ use Crm\ApiModule\Api\ApiHandler;
 use Crm\ApiModule\Authorization\ApiAuthorizationInterface;
 use Crm\ApiModule\Token\InternalToken;
 use Crm\ApplicationModule\Config\ApplicationConfig;
-use Crm\MobiletechModule\Config;
+use Crm\MobiletechModule\Models\Config;
 use GuzzleHttp\Client;
 
 /**

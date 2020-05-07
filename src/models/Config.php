@@ -1,6 +1,6 @@
 <?php
 
-namespace Crm\MobiletechModule;
+namespace Crm\MobiletechModule\Models;
 
 class Config
 {

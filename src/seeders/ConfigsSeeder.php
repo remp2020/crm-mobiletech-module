@@ -8,7 +8,7 @@ use Crm\ApplicationModule\Config\Repository\ConfigCategoriesRepository;
 use Crm\ApplicationModule\Config\Repository\ConfigsRepository;
 use Crm\ApplicationModule\Seeders\ConfigsTrait;
 use Crm\ApplicationModule\Seeders\ISeeder;
-use Crm\MobiletechModule\Config;
+use Crm\MobiletechModule\Models\Config;
 use Nette\Database\Connection;
 use Symfony\Component\Console\Output\OutputInterface;
 

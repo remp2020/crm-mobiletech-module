@@ -3,8 +3,8 @@
 namespace Crm\MobiletechModule\Hermes;
 
 use Crm\ApplicationModule\Config\ApplicationConfig;
-use Crm\MobiletechModule\Config;
-use Crm\MobiletechModule\Model\ApiClientInterface;
+use Crm\MobiletechModule\Models\Config;
+use Crm\MobiletechModule\Models\ApiClientInterface;
 use Crm\MobiletechModule\Repository\MobiletechInboundMessagesRepository;
 use Crm\MobiletechModule\Repository\MobiletechTemplatesRepository;
 use Crm\UsersModule\Repository\UsersRepository;
@@ -97,7 +97,7 @@ class SendHandler implements HandlerInterface
         $content = $this->getContent($mobiletechTemplate->content, $payload['params'] ?? []);
         $operatorType = $inboundMessage->operator_type;
 
-        $mobiletechOutbound = $this->mobiletechApiClient->send(
+        $this->mobiletechApiClient->send(
             $user,
             $mobiletechTemplate,
             $servId,

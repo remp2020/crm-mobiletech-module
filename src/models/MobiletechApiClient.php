@@ -1,10 +1,9 @@
 <?php
 
-namespace Crm\MobiletechModule\Model;
+namespace Crm\MobiletechModule\Models;
 
 use Crm\ApiModule\Token\InternalToken;
 use Crm\ApplicationModule\Config\ApplicationConfig;
-use Crm\MobiletechModule\Config;
 use Crm\MobiletechModule\Repository\MobiletechOutboundMessagesRepository;
 use GuzzleHttp\Client;
 use Nette\Database\Table\IRow;

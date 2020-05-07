@@ -1,6 +1,6 @@
 <?php
 
-namespace Crm\MobiletechModule\Model;
+namespace Crm\MobiletechModule\Models;
 
 use Nette\Database\Table\IRow;
 
