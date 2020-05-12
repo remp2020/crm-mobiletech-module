@@ -41,9 +41,10 @@ class SubscriptionTypeFormProvider implements SubscriptionTypeFormProviderInterf
 
         $form = $params['form'];
         $container = $form->addContainer('mobiletech');
-        $container->addText('short_name', 'mobiletech.dataprovider.short_name.title')
-            ->setOption('description', 'mobiletech.dataprovider.short_name.desc')
-            ->setAttribute('maxlength', 160);
+        $container->addText('short_name', 'mobiletech.dataprovider.short_name.label')
+            ->setOption('description', 'mobiletech.dataprovider.short_name.description')
+            ->setAttribute('placeholder', 'mobiletech.dataprovider.short_name.placeholder')
+            ->setAttribute('maxlength', 40);
 
         if (isset($params['subscriptionType'])) {
             $shortName = $this->subscriptionTypesMetaRepository->getMetaValue($params['subscriptionType'], self::SUBSCRIPTION_TYPE_SHORT_NAME);
