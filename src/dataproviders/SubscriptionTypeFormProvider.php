@@ -63,11 +63,6 @@ class SubscriptionTypeFormProvider implements SubscriptionTypeFormProviderInterf
     public function formSucceeded($form, $values)
     {
         $subscriptionType = $this->subscriptionTypesRepository->findBy('code', $values->code);
-
-        if ($subscriptionType) {
-            $this->subscriptionTypesMetaRepository->setMeta($subscriptionType, self::SUBSCRIPTION_TYPE_SHORT_NAME, $values->mobiletech->short_name);
-        } else {
-            throw new \Exception("Unable to load subscription type of code {$values->code}");
-        }
+        $this->subscriptionTypesMetaRepository->setMeta($subscriptionType, self::SUBSCRIPTION_TYPE_SHORT_NAME, $values->mobiletech->short_name);
     }
 }
