@@ -54,9 +54,6 @@ class SubscriptionTypeFormProvider implements SubscriptionTypeFormProviderInterf
                 ]);
             }
         }
-
-        $form->onSuccess[] = [$this, 'formSucceeded'];
-
         return $form;
     }
 
@@ -69,5 +66,7 @@ class SubscriptionTypeFormProvider implements SubscriptionTypeFormProviderInterf
         } else {
             $this->subscriptionTypesMetaRepository->removeMeta($subscriptionType->id, self::SUBSCRIPTION_TYPE_SHORT_NAME);
         }
+        unset($values->mobiletech);
+        return [$form, $values];
     }
 }
