@@ -137,9 +137,7 @@ class MobiletechWebhookApiHandler extends ApiHandler
             return $response;
         }
 
-        $this->mobiletechOutboundMessagesRepository->update($outbound, [
-            'status' => $payload->status,
-        ]);
+        $this->mobiletechOutboundMessagesRepository->updateStatus($outbound, $payload->status);
 
         $result = [
             'id' => $outbound->mobiletech_id,

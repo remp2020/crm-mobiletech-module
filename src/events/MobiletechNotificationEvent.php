@@ -4,17 +4,21 @@ namespace Crm\MobiletechModule\Events;
 
 use Crm\UsersModule\Events\NotificationEvent;
 use League\Event\Emitter;
-use Nette\Database\IRow;
+use Nette\Database\Table\IRow;
 
 /**
  * MobiletechNotificationEvent extends NotificationEvent for scenarios, when application needs to send notification
  * as a response to the received message (mobiletech inbound message).
+ *
+ * Any listener actually sending the message is required to call `setMobiletechOutboundMessage` for further processing.
  */
 class MobiletechNotificationEvent extends NotificationEvent
 {
     private $mobiletechInboundMessage;
 
     private $billKey;
+
+    private $mobiletechOutboundMessage;
 
     public function __construct(
         Emitter $emitter,
@@ -47,5 +51,15 @@ class MobiletechNotificationEvent extends NotificationEvent
     public function getBillKey(): ?string
     {
         return $this->billKey;
+    }
+
+    public function setMobiletechOutboundMessage(IRow $mobiletechOutboundMessage)
+    {
+        $this->mobiletechOutboundMessage = $mobiletechOutboundMessage;
+    }
+
+    public function getMobiletechOutboundMessage(): ?IRow
+    {
+        return $this->mobiletechOutboundMessage;
     }
 }

@@ -15,7 +15,7 @@ class MobiletechPhoneNumbersRepository extends Repository
     /**
      * @throws MobiletechAlreadyExistsException Thrown if phone number already exists.
      */
-    public function add(string $mobilePhoneNumber, ActiveRow $user): IRow
+    final public function add(string $mobilePhoneNumber, ActiveRow $user): IRow
     {
         $now = new DateTime();
 
@@ -31,7 +31,7 @@ class MobiletechPhoneNumbersRepository extends Repository
         }
     }
 
-    public function findByMobilePhoneNumber(string $mobilePhoneNumber): ?ActiveRow
+    final public function findByMobilePhoneNumber(string $mobilePhoneNumber): ?ActiveRow
     {
         if (strpos($mobilePhoneNumber, '+') !== false) {
             // convert international to local
@@ -44,7 +44,7 @@ class MobiletechPhoneNumbersRepository extends Repository
         return $result;
     }
 
-    public function findByUserId(int $userId): ?ActiveRow
+    final public function findByUserId(int $userId): ?ActiveRow
     {
         return $this->findBy('user_id', $userId);
     }

@@ -9,7 +9,7 @@ class MobiletechInboundMessagesRepository extends Repository
 {
     protected $tableName = 'mobiletech_inbound_messages';
 
-    public function add(
+    final public function add(
         ?IRow $user,
         string $mobiletechId,
         string $servId,
@@ -41,12 +41,12 @@ class MobiletechInboundMessagesRepository extends Repository
         ]);
     }
 
-    public function findByMobiletechId($mobiletechId)
+    final public function findByMobiletechId($mobiletechId)
     {
         return $this->findBy('mobiletech_id', $mobiletechId);
     }
 
-    public function update(IRow &$row, $data)
+    final public function update(IRow &$row, $data)
     {
         $data['updated_at'] = new \DateTime();
         return parent::update($row, $data);

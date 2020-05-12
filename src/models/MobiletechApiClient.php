@@ -30,30 +30,22 @@ class MobiletechApiClient implements ApiClientInterface
     }
 
     public function send(
-        ?IRow $user,
-        IRow $mobiletechTemplate,
-        string $servId,
-        string $projectId,
-        string $rcvMsgId,
-        string $from,
-        string $to,
-        string $billKey,
-        string $content,
-        string $operatorType
+        IRow $mobiletechOutboundMessage,
+        string $content
     ) {
         $message = [
-            'serv_id' => $servId,
-            'project_id' => $projectId,
-            'rcv_msg_id' => $rcvMsgId,
-            'from' => $from,
-            'to' => $to, // intentional swap
-            'billkey' => $billKey,
+            'serv_id' => $mobiletechOutboundMessage->serv_id,
+            'project_id' => $mobiletechOutboundMessage->project_id,
+            'rcv_msg_id' => $mobiletechOutboundMessage->rcv_msg_id,
+            'from' => $mobiletechOutboundMessage->from,
+            'to' => $mobiletechOutboundMessage->to,
+            'billkey' => $mobiletechOutboundMessage->billkey,
             'content' => $content,
             'content_coding' => self::CONTENT_CODING,
             'esm' => self::ESM,
             'dcs' => self::DCS,
             'expiration' => null, // TODO: populate expiration (from global config?)
-            'operator_type' => $operatorType,
+            'operator_type' => $mobiletechOutboundMessage->operator_type,
         ];
 
         $xml = ArrayToXml::convert($message, [
@@ -78,22 +70,12 @@ class MobiletechApiClient implements ApiClientInterface
         ]);
         $responseXml = new \SimpleXMLElement($response->getBody()->getContents());
 
-        $outboundMessage = $this->mobiletechOutboundMessagesRepository->add(
-            $user,
-            $responseXml->id,
-            $mobiletechTemplate,
-            $servId,
-            $projectId,
-            $from,
-            $to,
-            $billKey,
-            $content,
-            self::CONTENT_CODING,
-            self::DCS,
-            self::ESM,
-            $operatorType
-        );
+        $mobiletechOutboundMessage = $this->mobiletechOutboundMessagesRepository->update($mobiletechOutboundMessage, [
+                'mobiletech_id' => $responseXml->id,
+                'dcs' => self::DCS,
+                'esm' => self::ESM,
+        ]);
 
-        return $outboundMessage;
+        return $mobiletechOutboundMessage;
     }
 }

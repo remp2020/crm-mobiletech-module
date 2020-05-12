@@ -2,8 +2,12 @@ services:
 	moduleManager:
 		setup:
 			- addModule(Crm\MobiletechModule\MobiletechModule())
+	gatewayFactory:
+		setup:
+			- registerGateway(mobiletech, Crm\MobiletechModule\Gateways\Mobiletech)
 
 	mobiletechApiClient: Crm\MobiletechModule\Models\MockApiClient
+	mobiletechDeliveryStatus: Crm\MobiletechModule\Models\DeliveryStatus
 
 	# Authentication
 	- Crm\MobiletechModule\Authenticator\MobiletechAuthenticator
@@ -17,16 +21,21 @@ services:
 
 	# Events
 	- Crm\MobiletechModule\Events\NotificationHandler
+	- Crm\MobiletechModule\Events\ConfirmPaymentHandler
+
+	# Gateways
+	- Crm\MobiletechModule\Gateways\Mobiletech
 
 	# Hermes
 	- Crm\MobiletechModule\Hermes\SendHandler
 	mobiletechTestInboundHandler: Crm\MobiletechModule\Hermes\TestInboundHandler
 
 	# Repositories
-	- Crm\MobiletechModule\Repository\MobiletechPhoneNumbersRepository
-	- Crm\MobiletechModule\Repository\MobiletechInboundMessagesRepository
-	- Crm\MobiletechModule\Repository\MobiletechOutboundMessagesRepository
-	- Crm\MobiletechModule\Repository\MobiletechTemplatesRepository
+	mobiletechPhoneNumbersRepository: Crm\MobiletechModule\Repository\MobiletechPhoneNumbersRepository
+	mobiletechInboundMessagesRepository: Crm\MobiletechModule\Repository\MobiletechInboundMessagesRepository
+	mobiletechOutboundMessagesRepository: Crm\MobiletechModule\Repository\MobiletechOutboundMessagesRepository
+	mobiletechTemplatesRepository: Crm\MobiletechModule\Repository\MobiletechTemplatesRepository
 
 	# Seeders
 	- Crm\MobiletechModule\Seeders\ConfigsSeeder
+	- Crm\MobiletechModule\Seeders\PaymentGatewaysSeeder
