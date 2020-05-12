@@ -26,6 +26,9 @@ services:
 	# Gateways
 	- Crm\MobiletechModule\Gateways\Mobiletech
 
+	# Data providers
+	- Crm\MobiletechModule\DataProvider\SubscriptionTypeFormProvider
+
 	# Hermes
 	- Crm\MobiletechModule\Hermes\SendHandler
 	mobiletechTestInboundHandler: Crm\MobiletechModule\Hermes\TestInboundHandler

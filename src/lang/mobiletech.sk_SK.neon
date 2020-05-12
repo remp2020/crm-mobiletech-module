@@ -8,3 +8,7 @@ config:
     mobiletech_billkey_free:
         name: "Billing key pre nespoplatnené správy"
         description: "Billing key, ktorý bude použitý pri všeobecných notifikáciach a nespoplatnených správach odoslaných používateľovi (napr. <code>AZ19</code>)"
+dataprovider:
+	short_name:
+		title: Krátky názov pre SMS
+		desc: 'Krátky názov predplatného, ktorý sa bude posielať napr. cez SMS (maximálne 160 znakov). Ak nie je špecifikovaný, použije sa Verejný popis.'

@@ -10,6 +10,7 @@ use Crm\ApiModule\Router\ApiRoute;
 use Crm\ApplicationModule\Authenticator\AuthenticatorManagerInterface;
 use Crm\ApplicationModule\Commands\CommandsContainerInterface;
 use Crm\ApplicationModule\CrmModule;
+use Crm\ApplicationModule\DataProvider\DataProviderManager;
 use Crm\ApplicationModule\SeederManager;
 use Crm\MobiletechModule\Api\MobiletechServerProxyApiHandler;
 use Crm\MobiletechModule\Api\MobiletechWebhookApiHandler;
@@ -72,5 +73,13 @@ class MobiletechModule extends CrmModule
     public function registerCommands(CommandsContainerInterface $commandsContainer)
     {
         $commandsContainer->registerCommand($this->getInstance(TestNotificationCommand::class));
+    }
+
+    public function registerDataProviders(DataProviderManager $dataProviderManager)
+    {
+        $dataProviderManager->registerDataProvider(
+            'subscriptions.dataprovider.subscription_type_form',
+            $this->getInstance(\Crm\MobiletechModule\DataProvider\SubscriptionTypeFormProvider::class)
+        );
     }
 }
