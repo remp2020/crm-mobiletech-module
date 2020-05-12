@@ -9,7 +9,7 @@ config:
         name: "Billing key pre nespoplatnené správy"
         description: "Billing key, ktorý bude použitý pri všeobecných notifikáciach a nespoplatnených správach odoslaných používateľovi (napr. <code>AZ19</code>)"
 dataprovider:
-	short_name:
-		label: Krátky názov pre SMS
-		placeholder: 'napríklad "Print na mesiac"'
-		description: 'Krátky názov predplatného (maximálne 40 znakov), ktorý sa bude posielať napr. cez SMS . Ak nie je špecifikovaný, použije sa Verejný popis.'
+    short_name:
+        label: Krátky názov pre SMS
+        placeholder: 'napríklad "Print na mesiac"'
+        description: 'Krátky názov predplatného (maximálne 40 znakov), ktorý sa bude posielať napr. cez SMS . Ak nie je špecifikovaný, použije sa Verejný popis.'

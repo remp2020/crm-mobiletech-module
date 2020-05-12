@@ -9,7 +9,7 @@ config:
         name: "Billing key for free messages"
         description: "Billing key used for sending user notifications and any other free messages (e.g. <code>AZ19</code>)"
 dataprovider:
-	short_name:
-		label: Short name
-		placeholder: 'for example "Month print"'
-		description: 'Short name (max. 40 characters) of subscription to be sent via SMS. If not specified, User label will be used instead.'
+    short_name:
+        label: Short name
+        placeholder: 'for example "Month print"'
+        description: 'Short name (max. 40 characters) of subscription to be sent via SMS. If not specified, User label will be used instead.'
