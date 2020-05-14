@@ -7,11 +7,6 @@ class DeliveryStatus
     private const FLAG_BILLING = 'A';
     private const FLAG_DELIVERY = 'D';
 
-    private const OPERATOR_O2 = '2';
-    private const OPERATOR_ORANGE = 'O';
-    private const OPERATOR_TELEKOM = 'T';
-    private const OPERATOR_STVORKA = 'S';
-
     public const BILLED = 'billed';
     public const NOT_DELIVERED = 'not_delivered';
     public const DELIVERED = 'delivered';
@@ -48,6 +43,15 @@ class DeliveryStatus
         }
     }
 
+    public function getSuccessMobiletechDeliveryCodes()
+    {
+        return [
+            'A0',
+            'D0',
+            'D1',
+        ];
+    }
+
     private function getBillingStatus($code): int
     {
         if (0 === $code) {
@@ -65,7 +69,7 @@ class DeliveryStatus
 
     private function getDeliveryStatus(int $code, ?string $operator = null): string
     {
-        if ($code === 0 && $operator === self::OPERATOR_O2) {
+        if ($code === 0 && $operator === OperatorTypeResolver::OPERATOR_O2) {
             return self::DELIVERED;
         }
         if ($code === 1) {

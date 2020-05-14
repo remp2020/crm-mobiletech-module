@@ -2,6 +2,7 @@
 
 namespace Crm\MobiletechModule\Gateways;
 
+use Crm\MobiletechModule\Events\MobiletechNotificationEnvelope;
 use Crm\MobiletechModule\Events\MobiletechNotificationEvent;
 use Crm\MobiletechModule\Models\DeliveryStatus;
 use Crm\MobiletechModule\Repository\MobiletechInboundMessagesRepository;
@@ -24,34 +25,38 @@ class Mobiletech implements PaymentInterface
 
     public const PAYMENT_META_TEMPLATE_PARAMS = 'mobiletech_template_params';
 
-    private $emitter;
+    protected $emitter;
 
-    private $paymentMetaRepository;
+    protected $hermesEmitter;
 
-    private $mobiletechInboundMessagesRepository;
+    protected $paymentMetaRepository;
 
-    private $mobiletechOutboundMessagesRepository;
+    protected $mobiletechInboundMessagesRepository;
 
-    private $deliveryStatus;
+    protected $mobiletechOutboundMessagesRepository;
 
-    private $inboundMessage;
+    protected $deliveryStatus;
 
-    private $billkey;
+    protected $inboundMessage;
 
-    private $templateCode;
+    protected $billkey;
 
-    private $params;
+    protected $templateCode;
 
-    private $payment;
+    protected $params;
+
+    protected $payment;
 
     public function __construct(
         Emitter $emitter,
+        \Tomaj\Hermes\Emitter $hermesEmitter,
         PaymentMetaRepository $paymentMetaRepository,
         MobiletechInboundMessagesRepository $mobiletechInboundMessagesRepository,
         MobiletechOutboundMessagesRepository $mobiletechOutboundMessagesRepository,
         DeliveryStatus $deliveryStatus
     ) {
         $this->emitter = $emitter;
+        $this->hermesEmitter = $hermesEmitter;
         $this->paymentMetaRepository = $paymentMetaRepository;
         $this->mobiletechInboundMessagesRepository = $mobiletechInboundMessagesRepository;
         $this->mobiletechOutboundMessagesRepository = $mobiletechOutboundMessagesRepository;
@@ -94,8 +99,7 @@ class Mobiletech implements PaymentInterface
     {
         $event = new MobiletechNotificationEvent(
             $this->emitter,
-            $this->inboundMessage,
-            $this->billkey,
+            new MobiletechNotificationEnvelope($this->inboundMessage, $this->billkey),
             $this->payment->user,
             $this->templateCode,
             $this->params,
@@ -125,7 +129,14 @@ class Mobiletech implements PaymentInterface
 
     public function complete($payment): ?bool
     {
+        $this->payment = $payment;
+
         $outboundMessage = $this->mobiletechOutboundMessagesRepository->findByPayment($payment);
+        return $this->checkChargeStatus($outboundMessage);
+    }
+
+    public function checkChargeStatus($outboundMessage)
+    {
         $deliveryStatus = $this->deliveryStatus->getStatusCode($outboundMessage->status);
 
         return in_array($deliveryStatus, [
@@ -134,7 +145,7 @@ class Mobiletech implements PaymentInterface
         ], true);
     }
 
-    private function getContext($payment)
+    protected function getContext($payment)
     {
         return 'payment.charge.' . $payment->id;
     }

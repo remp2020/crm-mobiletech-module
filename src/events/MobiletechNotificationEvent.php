@@ -14,24 +14,20 @@ use Nette\Database\Table\IRow;
  */
 class MobiletechNotificationEvent extends NotificationEvent
 {
-    private $mobiletechInboundMessage;
-
-    private $billKey;
+    private $mobiletechEnvelope;
 
     private $mobiletechOutboundMessage;
 
     public function __construct(
         Emitter $emitter,
-        IRow $mobiletechInboundMessage,
-        ?string $billKey,
+        MobiletechNotificationEnvelope $mobiletechEnvelope,
         ?IRow $user,
         string $templateCode,
         array $params = [],
         string $context = null,
         \DateTime $scheduleAt = null
     ) {
-        $this->mobiletechInboundMessage = $mobiletechInboundMessage;
-        $this->billKey = $billKey;
+        $this->mobiletechEnvelope = $mobiletechEnvelope;
         parent::__construct(
             $emitter,
             $user,
@@ -43,17 +39,42 @@ class MobiletechNotificationEvent extends NotificationEvent
         );
     }
 
-    public function getMobiletechInboundMessage(): IRow
+    public function getMobiletechInboundMessage(): ?IRow
     {
-        return $this->mobiletechInboundMessage;
+        return $this->mobiletechEnvelope->getMobiletechInboundMessage();
+    }
+
+    public function getRcvMsgId(): ?string
+    {
+        return $this->mobiletechEnvelope->getRcvMsgId();
     }
 
     public function getBillKey(): ?string
     {
-        return $this->billKey;
+        return $this->mobiletechEnvelope->getBillKey();
     }
 
-    public function setMobiletechOutboundMessage(IRow $mobiletechOutboundMessage)
+    public function getProjectId(): ?string
+    {
+        return $this->mobiletechEnvelope->getProjectId();
+    }
+
+    public function getToPhoneNumber(): string
+    {
+        return $this->mobiletechEnvelope->getToPhoneNumber();
+    }
+
+    public function getServId(): string
+    {
+        return $this->mobiletechEnvelope->getServId();
+    }
+
+    public function getFromShortNumber(): string
+    {
+        return $this->mobiletechEnvelope->getFromShortNumber();
+    }
+
+    public function setMobiletechOutboundMessage(IRow $mobiletechOutboundMessage): void
     {
         $this->mobiletechOutboundMessage = $mobiletechOutboundMessage;
     }

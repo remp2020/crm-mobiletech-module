@@ -2,9 +2,12 @@
 
 namespace Crm\MobiletechModule\Hermes;
 
+use Crm\MobiletechModule\Events\MobiletechNotificationEnvelope;
 use Crm\MobiletechModule\Events\MobiletechNotificationEvent;
 use Crm\MobiletechModule\Repository\MobiletechInboundMessagesRepository;
 use Crm\MobiletechModule\Repository\MobiletechTemplatesRepository;
+use Crm\PaymentsModule\PaymentProcessor;
+use Crm\PaymentsModule\Repository\PaymentsRepository;
 use League\Event\Emitter;
 use Tomaj\Hermes\Handler\HandlerInterface;
 use Tomaj\Hermes\MessageInterface;
@@ -27,14 +30,22 @@ class TestInboundHandler implements HandlerInterface
 
     private $templateCode;
 
+    private $paymentsRepository;
+
+    private $paymentProcessor;
+
     public function __construct(
         MobiletechInboundMessagesRepository $mobiletechInboundMessagesRepository,
         MobiletechTemplatesRepository $mobiletechTemplatesRepository,
-        Emitter $emitter
+        Emitter $emitter,
+        PaymentsRepository $paymentsRepository,
+        PaymentProcessor $paymentProcessor
     ) {
         $this->mobiletechInboundMessagesRepository = $mobiletechInboundMessagesRepository;
         $this->mobiletechTemplatesRepository = $mobiletechTemplatesRepository;
         $this->emitter = $emitter;
+        $this->paymentsRepository = $paymentsRepository;
+        $this->paymentProcessor = $paymentProcessor;
     }
 
     public function setBillKey(string $billKey)
@@ -69,8 +80,7 @@ class TestInboundHandler implements HandlerInterface
 
         $this->emitter->emit(new MobiletechNotificationEvent(
             $this->emitter,
-            $inboundMessage,
-            $this->billKey,
+            new MobiletechNotificationEnvelope($inboundMessage, $this->billKey),
             $inboundMessage->user,
             $template->code,
             [

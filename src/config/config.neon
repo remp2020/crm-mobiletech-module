@@ -5,9 +5,11 @@ services:
 	gatewayFactory:
 		setup:
 			- registerGateway(mobiletech, Crm\MobiletechModule\Gateways\Mobiletech)
+			- registerGateway(mobiletech_recurrent, Crm\MobiletechModule\Gateways\MobiletechRecurrent)
 
 	mobiletechApiClient: Crm\MobiletechModule\Models\MockApiClient
 	mobiletechDeliveryStatus: Crm\MobiletechModule\Models\DeliveryStatus
+	mobiletechOperatorTypeResolver: Crm\MobiletechModule\Models\OperatorTypeResolver
 
 	# Authentication
 	- Crm\MobiletechModule\Authenticator\MobiletechAuthenticator
@@ -25,6 +27,7 @@ services:
 
 	# Gateways
 	- Crm\MobiletechModule\Gateways\Mobiletech
+	- Crm\MobiletechModule\Gateways\MobiletechRecurrent
 
 	# Data providers
 	- Crm\MobiletechModule\DataProvider\SubscriptionTypeFormProvider
@@ -32,6 +35,7 @@ services:
 	# Hermes
 	- Crm\MobiletechModule\Hermes\SendHandler
 	mobiletechTestInboundHandler: Crm\MobiletechModule\Hermes\TestInboundHandler
+	- Crm\MobiletechModule\Hermes\PendingChargeTimeoutHandler
 
 	# Repositories
 	mobiletechPhoneNumbersRepository: Crm\MobiletechModule\Repository\MobiletechPhoneNumbersRepository

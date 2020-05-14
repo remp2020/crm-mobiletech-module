@@ -4,6 +4,7 @@ namespace Crm\MobiletechModule\Repository;
 
 use Crm\ApplicationModule\Repository;
 use Crm\MobiletechModule\Events\OutboundMessageStatusUpdatedEvent;
+use Crm\MobiletechModule\Models\DeliveryStatus;
 use League\Event\Emitter;
 use Nette\Caching\IStorage;
 use Nette\Database\Context;
@@ -15,13 +16,17 @@ class MobiletechOutboundMessagesRepository extends Repository
 
     private $emitter;
 
+    private $deliveryStatus;
+
     public function __construct(
         Context $database,
         IStorage $cacheStorage,
-        Emitter $emitter
+        Emitter $emitter,
+        DeliveryStatus $deliveryStatus
     ) {
         parent::__construct($database, $cacheStorage);
         $this->emitter = $emitter;
+        $this->deliveryStatus = $deliveryStatus;
     }
 
     public function add(
@@ -29,12 +34,13 @@ class MobiletechOutboundMessagesRepository extends Repository
         ?string $mobiletechId,
         IRow $mobiletechTemplate,
         string $servId,
-        string $projectId,
-        string $rcvMsgId,
+        ?string $projectId,
+        ?string $rcvMsgId,
         string $from,
         string $to,
         string $billKey,
         string $contentLength,
+        int $expiration,
         ?string $dcs,
         ?string $esm,
         string $operatorType
@@ -50,6 +56,7 @@ class MobiletechOutboundMessagesRepository extends Repository
             'to' => $to,
             'billkey' => $billKey,
             'content_length' => $contentLength,
+            'expiration' => $expiration,
             'dcs' => $dcs,
             'esm' => $esm,
             'operator_type' => $operatorType,
@@ -58,12 +65,24 @@ class MobiletechOutboundMessagesRepository extends Repository
         ]);
     }
 
-    public function findByMobiletechId($mobiletechId)
+    final public function findByMobiletechId($mobiletechId)
     {
         return $this->findBy('mobiletech_id', $mobiletechId);
     }
 
-    public function findByPayment(IRow $payment)
+    final public function findLastSuccessfulByPhoneNumber($phoneNumber)
+    {
+        return $this->getTable()
+            ->where([
+                'to' => $phoneNumber,
+                'status' => $this->deliveryStatus->getSuccessMobiletechDeliveryCodes(),
+            ])
+            ->order('created_at DESC')
+            ->limit(1)
+            ->fetch();
+    }
+
+    final public function findByPayment(IRow $payment)
     {
         return $payment->related('mobiletech_outbound_messages')
             ->order('created_at DESC')
@@ -71,7 +90,20 @@ class MobiletechOutboundMessagesRepository extends Repository
             ->fetch();
     }
 
-    public function updateStatus(IRow $row, string $status)
+    final public function findByRcvMsgId($rcvMsgId)
+    {
+        return $this->findBy('rcv_msg_id', $rcvMsgId);
+    }
+
+    final public function findLastByBillKey($billKey)
+    {
+        return $this->getTable()->where('billKey', $billKey)
+            ->order('created_at DESC')
+            ->limit(1)
+            ->fetch();
+    }
+
+    final public function updateStatus(IRow $row, string $status)
     {
         $this->update($row, [
             'status' => $status,
@@ -79,7 +111,7 @@ class MobiletechOutboundMessagesRepository extends Repository
         $this->emitter->emit(new OutboundMessageStatusUpdatedEvent($row));
     }
 
-    public function update(IRow &$row, $data)
+    final public function update(IRow &$row, $data)
     {
         $data['updated_at'] = new \DateTime();
         return parent::update($row, $data);

@@ -33,6 +33,7 @@ class MobiletechApiClient implements ApiClientInterface
         IRow $mobiletechOutboundMessage,
         string $content
     ) {
+
         $message = [
             'serv_id' => $mobiletechOutboundMessage->serv_id,
             'project_id' => $mobiletechOutboundMessage->project_id,
@@ -44,7 +45,7 @@ class MobiletechApiClient implements ApiClientInterface
             'content_coding' => self::CONTENT_CODING,
             'esm' => self::ESM,
             'dcs' => self::DCS,
-            'expiration' => null, // TODO: populate expiration (from global config?)
+            'expiration' => $mobiletechOutboundMessage->expiration,
             'operator_type' => $mobiletechOutboundMessage->operator_type,
         ];
 

@@ -5,11 +5,11 @@ namespace Crm\MobiletechModule\Events;
 use Crm\ApplicationModule\Config\ApplicationConfig;
 use Crm\ApplicationModule\Hermes\HermesMessage;
 use Crm\MobiletechModule\Models\Config;
+use Crm\MobiletechModule\Models\OperatorTypeResolver;
 use Crm\MobiletechModule\Repository\MobiletechOutboundMessagesRepository;
 use Crm\MobiletechModule\Repository\MobiletechPhoneNumbersRepository;
 use Crm\MobiletechModule\Repository\MobiletechTemplatesRepository;
 use Crm\UsersModule\Events\NotificationEvent;
-use Crm\UsersModule\Repository\UsersRepository;
 use League\Event\AbstractListener;
 use League\Event\EventInterface;
 use Tomaj\Hermes\Emitter;
@@ -24,24 +24,24 @@ class NotificationHandler extends AbstractListener
 
     private $mobiletechOutboundMessagesRepository;
 
-    private $usersRepository;
-
     private $applicationConfig;
+
+    private $operatorTypeResolver;
 
     public function __construct(
         Emitter $hermesEmitter,
         MobiletechPhoneNumbersRepository $mobiletechPhoneNumbersRepository,
         MobiletechTemplatesRepository $mobiletechTemplatesRepository,
         MobiletechOutboundMessagesRepository $mobiletechOutboundMessagesRepository,
-        UsersRepository $usersRepository,
-        ApplicationConfig $applicationConfig
+        ApplicationConfig $applicationConfig,
+        OperatorTypeResolver $operatorTypeResolver
     ) {
         $this->hermesEmitter = $hermesEmitter;
         $this->mobiletechPhoneNumbersRepository = $mobiletechPhoneNumbersRepository;
         $this->mobiletechTemplatesRepository = $mobiletechTemplatesRepository;
         $this->mobiletechOutboundMessagesRepository = $mobiletechOutboundMessagesRepository;
-        $this->usersRepository = $usersRepository;
         $this->applicationConfig = $applicationConfig;
+        $this->operatorTypeResolver = $operatorTypeResolver;
     }
 
     public function handle(EventInterface $event)
@@ -56,25 +56,33 @@ class NotificationHandler extends AbstractListener
             return;
         }
 
-        $inboundMessage = null;
         $billKey = null;
-        $phoneNumber = null;
+        $rcvMsgId = null;
+        $projectId = null;
+        $toPhoneNumber = null;
+        $servId = null;
+        $fromShortNumber = null;
 
         if ($event instanceof MobiletechNotificationEvent) {
-            // if there is a triggering message, respond to sender's phone number and link inbound message
-            $inboundMessage = $event->getMobiletechInboundMessage();
-            $phoneNumber = $event->getMobiletechInboundMessage()->from;
             $billKey = $event->getBillKey();
-        } elseif ($event->getUser()) {
-            // if there isn't a triggering message, find phone number based on the user settings
+            $rcvMsgId = $event->getRcvMsgId();
+            $projectId = $event->getProjectId();
+            $toPhoneNumber = $event->getToPhoneNumber();
+            $servId = $event->getServId();
+            $fromShortNumber = $event->getFromShortNumber();
+        }
+
+        if (!$toPhoneNumber && $event->getUser()) {
+            // if this isn't mobiletech notification, find phone number based on the user settings
             $mobiletechPhoneNumber = $this->mobiletechPhoneNumbersRepository->findByUserId($event->getUser()->id);
             if (!$mobiletechPhoneNumber) {
                 // we don't have a phone number for this user, nothing will be sent
                 return;
             }
-            $phoneNumber = $mobiletechPhoneNumber->phone_number;
+            $toPhoneNumber = $mobiletechPhoneNumber->phone_number;
         }
 
+        // validate bill key
         if (!$billKey) {
             $billKey = $this->applicationConfig->get(Config::BILLKEY_FREE);
         }
@@ -82,27 +90,59 @@ class NotificationHandler extends AbstractListener
             throw new \Exception('Attempt to send Mobiletech message without bill key');
         }
 
+        $lastWithSameBillKey = $this->mobiletechOutboundMessagesRepository->findLastByBillKey($billKey);
+
+        // validate serv id
+        if (!$servId && $lastWithSameBillKey) {
+            $servId = $lastWithSameBillKey->serv_id;
+        }
+        if (!$servId) {
+            // return if we didn't figure out servId automatically
+            return;
+        }
+
+        // validate message sender
+        if (!$fromShortNumber && $lastWithSameBillKey) {
+            $fromShortNumber = $lastWithSameBillKey->from;
+        }
+        if (!$fromShortNumber) {
+            // return if we don't know sender number
+            return;
+        }
+
         // making sure the number is in the right format
-        if (strpos($phoneNumber, '+') === false) {
-            $phoneNumber = '+421' . substr($phoneNumber, 1);
+        if (strpos($toPhoneNumber, '+') === false) {
+            $toPhoneNumber = '+421' . substr($toPhoneNumber, 1);
+        }
+
+        // resolve operator code
+        $operatorType = $this->operatorTypeResolver->resolve($toPhoneNumber);
+        if (!$operatorType) {
+            // return if we don't know operator type
+            return;
         }
 
         $content = $this->getContent($mobiletechTemplate->content, $event->getParams());
+        $expiration = 100;
+        if (!$rcvMsgId) {
+            $expiration = 600;
+        }
 
         $mobiletechOutboundMessage = $this->mobiletechOutboundMessagesRepository->add(
             $event->getUser(),
             null, // we don't have this yet, will be updated once the message is sent
             $mobiletechTemplate,
-            $inboundMessage->serv_id,
-            $inboundMessage->project_id,
-            $inboundMessage->mobiletech_id,
-            $inboundMessage->to,
-            $phoneNumber,
+            $servId, // can be constant (one service ID per publisher according to Mobiletech)
+            $projectId, // should be OK when it's empty (according to Mobiletech)
+            $rcvMsgId,
+            $fromShortNumber,
+            $toPhoneNumber,
             $billKey,
             strlen($content),
+            $expiration,
             null,
             null,
-            $inboundMessage->operator_type
+            $operatorType
         );
         $event->setMobiletechOutboundMessage($mobiletechOutboundMessage);
 
