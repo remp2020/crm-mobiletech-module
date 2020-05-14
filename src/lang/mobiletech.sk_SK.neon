@@ -12,4 +12,5 @@ dataprovider:
     short_name:
         label: Krátky názov pre SMS
         placeholder: 'napríklad "Print na mesiac"'
-        description: 'Krátky názov predplatného (maximálne 40 znakov), ktorý sa bude posielať napr. cez SMS . Ak nie je špecifikovaný, použije sa Verejný popis.'
+        description: 'Krátky názov predplatného (maximálne 40 znakov) bez diakritiky, ktorý sa bude posielať napr. cez SMS . Ak nie je špecifikovaný, použije sa Verejný popis.'
+        error_diacritics: 'Krátky názov nemôže obsahovať diakritiku'

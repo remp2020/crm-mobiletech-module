@@ -12,4 +12,5 @@ dataprovider:
     short_name:
         label: Short name
         placeholder: 'for example "Month print"'
-        description: 'Short name (max. 40 characters) of subscription to be sent via SMS. If not specified, User label will be used instead.'
+        description: 'Short name (max. 40 characters) of subscription to be sent via SMS, without diacritics. If not specified, User label will be used instead.'
+        error_diacritics: 'Short name cannot contain diacritics'
