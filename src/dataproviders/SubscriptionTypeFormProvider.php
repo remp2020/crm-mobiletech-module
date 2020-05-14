@@ -9,6 +9,7 @@ use Crm\SubscriptionsModule\Repository\SubscriptionTypesMetaRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionTypesRepository;
 use Nette\Application\UI\Form;
 use Nette\Utils\Strings;
+use Nette\Forms\Controls\TextInput;
 
 class SubscriptionTypeFormProvider implements SubscriptionTypeFormProviderInterface
 {
@@ -45,7 +46,12 @@ class SubscriptionTypeFormProvider implements SubscriptionTypeFormProviderInterf
         $container->addText('short_name', 'mobiletech.dataprovider.short_name.label')
             ->setOption('description', 'mobiletech.dataprovider.short_name.description')
             ->setAttribute('placeholder', 'mobiletech.dataprovider.short_name.placeholder')
-            ->setAttribute('maxlength', 40);
+            ->setAttribute('maxlength', 40)
+            ->setRequired(false)
+            ->addRule(function (TextInput $control) {
+                $value = $control->getValue();
+                return $value === Strings::toAscii($value);
+            }, 'mobiletech.dataprovider.short_name.error_diacritics');
 
         if (isset($params['subscriptionType'])) {
             $shortName = $this->subscriptionTypesMetaRepository->getMetaValue($params['subscriptionType'], self::SUBSCRIPTION_TYPE_SHORT_NAME);
