@@ -90,11 +90,6 @@ class MobiletechOutboundMessagesRepository extends Repository
             ->fetch();
     }
 
-    final public function findByRcvMsgId($rcvMsgId)
-    {
-        return $this->findBy('rcv_msg_id', $rcvMsgId);
-    }
-
     final public function findLastByBillKey($billKey)
     {
         return $this->getTable()->where('billKey', $billKey)

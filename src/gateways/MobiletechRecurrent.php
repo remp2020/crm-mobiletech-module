@@ -22,9 +22,13 @@ class MobiletechRecurrent extends Mobiletech implements RecurrentPaymentInterfac
         if (!$originalInboundMessage) {
             throw new MobiletechGatewayException('unable to charge mobiletech recurrent payment, invalid token: ' . $token);
         }
-        $originalOutboundMessage = $this->mobiletechOutboundMessagesRepository->findByRcvMsgId($token);
+        $originalOutboundMessage = $this->mobiletechOutboundMessagesRepository->getTable()
+            ->where('rcv_msg_id = ?', $token)
+            ->where('payment_id IS NOT NULL')
+            ->fetch();
+
         if (!$originalOutboundMessage) {
-            throw new MobiletechGatewayException('unable to charge mobiletech recurrent payment, missing outbound message to initiating inbound message: ' . $token);
+            throw new MobiletechGatewayException('unable to charge mobiletech recurrent payment, missing outbound billing message to initiating inbound message: ' . $token);
         }
 
         $event = new MobiletechNotificationEvent(
@@ -38,7 +42,10 @@ class MobiletechRecurrent extends Mobiletech implements RecurrentPaymentInterfac
             ),
             $payment->user,
             $originalOutboundMessage->mobiletech_template->code,
-            [],
+            [
+                'subscription_name' => $this->subscriptionTypeShortName->getShortName($payment->subscription_type),
+                'price' => (int) $payment->subscription_type->price,
+            ],
             $this->getContext($payment)
         );
         $event = $this->emitter->emit($event);

@@ -5,6 +5,7 @@ namespace Crm\MobiletechModule\Gateways;
 use Crm\MobiletechModule\Events\MobiletechNotificationEnvelope;
 use Crm\MobiletechModule\Events\MobiletechNotificationEvent;
 use Crm\MobiletechModule\Models\DeliveryStatus;
+use Crm\MobiletechModule\Models\SubscriptionTypeShortName;
 use Crm\MobiletechModule\Repository\MobiletechInboundMessagesRepository;
 use Crm\MobiletechModule\Repository\MobiletechOutboundMessagesRepository;
 use Crm\PaymentsModule\GatewayFail;
@@ -37,6 +38,8 @@ class Mobiletech implements PaymentInterface
 
     protected $deliveryStatus;
 
+    protected $subscriptionTypeShortName;
+
     protected $inboundMessage;
 
     protected $billkey;
@@ -53,7 +56,8 @@ class Mobiletech implements PaymentInterface
         PaymentMetaRepository $paymentMetaRepository,
         MobiletechInboundMessagesRepository $mobiletechInboundMessagesRepository,
         MobiletechOutboundMessagesRepository $mobiletechOutboundMessagesRepository,
-        DeliveryStatus $deliveryStatus
+        DeliveryStatus $deliveryStatus,
+        SubscriptionTypeShortName $subscriptionTypeShortName
     ) {
         $this->emitter = $emitter;
         $this->hermesEmitter = $hermesEmitter;
@@ -61,6 +65,7 @@ class Mobiletech implements PaymentInterface
         $this->mobiletechInboundMessagesRepository = $mobiletechInboundMessagesRepository;
         $this->mobiletechOutboundMessagesRepository = $mobiletechOutboundMessagesRepository;
         $this->deliveryStatus = $deliveryStatus;
+        $this->subscriptionTypeShortName = $subscriptionTypeShortName;
     }
 
     public function begin($payment)
@@ -84,7 +89,7 @@ class Mobiletech implements PaymentInterface
         }
 
         if ($meta[self::PAYMENT_META_TEMPLATE_PARAMS] ?? false) {
-            $this->params = Json::decode($meta[self::PAYMENT_META_TEMPLATE_PARAMS]);
+            $this->params = Json::decode($meta[self::PAYMENT_META_TEMPLATE_PARAMS], Json::FORCE_ARRAY);
         } else {
             $this->params = [];
         }

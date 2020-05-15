@@ -37,15 +37,11 @@ class MobiletechPhoneNumbersRepository extends Repository
             // convert international to local
             $mobilePhoneNumber = '0' . substr($mobilePhoneNumber, -9);
         }
-        $result = $this->findBy('phone_number', $mobilePhoneNumber);
-        if (!$result) {
-            return null;
-        }
-        return $result;
+        return $this->findBy('phone_number', $mobilePhoneNumber) ?: null;
     }
 
     final public function findByUserId(int $userId): ?ActiveRow
     {
-        return $this->findBy('user_id', $userId);
+        return $this->findBy('user_id', $userId) ?: null;
     }
 }

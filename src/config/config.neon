@@ -10,6 +10,7 @@ services:
 	mobiletechApiClient: Crm\MobiletechModule\Models\MockApiClient
 	mobiletechDeliveryStatus: Crm\MobiletechModule\Models\DeliveryStatus
 	mobiletechOperatorTypeResolver: Crm\MobiletechModule\Models\OperatorTypeResolver
+	mobiletechSubscriptionTypeShortName: Crm\MobiletechModule\Models\SubscriptionTypeShortName
 
 	# Authentication
 	- Crm\MobiletechModule\Authenticator\MobiletechAuthenticator

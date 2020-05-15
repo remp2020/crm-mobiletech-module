@@ -37,13 +37,13 @@ class MobiletechAuthenticator implements AuthenticatorInterface
     {
         $this->password = $credentials['password'] ?? null;
         if (isset($credentials['mobile_phone'])) {
-            $this->mobilePhone = $this->sanitizeSlovakMobilePhoneNumber($credentials['mobile_phone']);
+            $this->mobilePhone = self::sanitizeSlovakMobilePhoneNumber($credentials['mobile_phone']);
         }
 
         // if mobile phone number was not provided, try to check username field
         // (compatibility with existing login forms without any change)
         if ($this->mobilePhone === null && isset($credentials['username'])) {
-            $this->mobilePhone = $this->sanitizeSlovakMobilePhoneNumber($credentials['username']);
+            $this->mobilePhone = self::sanitizeSlovakMobilePhoneNumber($credentials['username']);
         }
 
         return $this;
@@ -84,15 +84,19 @@ class MobiletechAuthenticator implements AuthenticatorInterface
     }
 
     /**
-     * Validate and sanitize slovak phone number. Finds number also in SME emails (09XXXXXXXX@post.sk).
+     * Validate and sanitize slovak phone number.
+     *
+     * @param string $phoneNumber
+     *
+     * @return string|null
      */
-    private function sanitizeSlovakMobilePhoneNumber(string $phoneNumber): ?string
+    public static function sanitizeSlovakMobilePhoneNumber(string $phoneNumber): ?string
     {
         // remove spaces
         $phoneNumber = trim(preg_replace('/\s+/', '', $phoneNumber));
 
         // slovak mobile phone numbers start with 09 and have 8 more numbers; eg 0908123456
-        preg_match('(09[0-9]{8})', $phoneNumber, $matches);
+        preg_match('(^09[0-9]{8}$)', $phoneNumber, $matches);
 
         if (isset($matches[0])) {
             return $matches[0];
