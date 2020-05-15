@@ -2,8 +2,11 @@
 
 namespace Crm\MobiletechModule\Models;
 
+use Crm\MobiletechModule\Authenticator\MobiletechAuthenticator;
 use Crm\MobiletechModule\Repository\MobiletechInboundMessagesRepository;
 use Crm\MobiletechModule\Repository\MobiletechOutboundMessagesRepository;
+use Crm\SmeModule\Sms\NotSlovakPhoneNumberException;
+use Nette\Utils\Strings;
 
 class OperatorTypeResolver
 {
@@ -81,5 +84,28 @@ class OperatorTypeResolver
             default:
                 return null;
         }
+    }
+
+    /**
+     * @param string $number
+     *
+     * @return string
+     * @throws NotSlovakPhoneNumberException
+     */
+    public static function convertInternationalSlovakPhoneNumberToLocal(string $number): string
+    {
+        // it's directly slovak number in usable format
+        if (MobiletechAuthenticator::sanitizeSlovakMobilePhoneNumber($number) !== null) {
+            return $number;
+        }
+
+        if (Strings::startsWith($number, '00421')) {
+            return '0' . substr($number, 5);
+        }
+        if (Strings::startsWith($number, '+421')) {
+            return '0' . substr($number, 4);
+        }
+
+        throw new NotSlovakPhoneNumberException("Number {$number} is not a slovak number");
     }
 }
