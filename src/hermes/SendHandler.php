@@ -43,9 +43,15 @@ class SendHandler implements HandlerInterface
             return false;
         }
 
+        $content = $payload['content'];
+        if (mb_strlen($content) > 160) {
+            Debugger::log("Mobiletech message longer than 160 characters, stripping. Message: '$content'", ILogger::ERROR);
+            $content = mb_substr($content, 0, 160);
+        }
+
         $this->mobiletechApiClient->send(
             $outboundMessage,
-            $payload['content']
+            $content
         );
 
         return true;
