@@ -3,7 +3,7 @@
 namespace Crm\MobiletechModule\Tests;
 
 use Crm\MobiletechModule\Models\OperatorTypeResolver;
-use Crm\SmeModule\Sms\NotSlovakPhoneNumberException;
+use Crm\SmeModule\Models\Mobiletech\NotSlovakPhoneNumberException;
 use PHPUnit\Framework\TestCase;
 
 class CheckSlovakNumbersTest extends TestCase

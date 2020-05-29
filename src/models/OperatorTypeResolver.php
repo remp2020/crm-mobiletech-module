@@ -5,7 +5,7 @@ namespace Crm\MobiletechModule\Models;
 use Crm\MobiletechModule\Authenticator\MobiletechAuthenticator;
 use Crm\MobiletechModule\Repository\MobiletechInboundMessagesRepository;
 use Crm\MobiletechModule\Repository\MobiletechOutboundMessagesRepository;
-use Crm\SmeModule\Sms\NotSlovakPhoneNumberException;
+use Crm\SmeModule\Models\Mobiletech\NotSlovakPhoneNumberException;
 use Nette\Utils\Strings;
 
 class OperatorTypeResolver
