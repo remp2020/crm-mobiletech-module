@@ -72,6 +72,10 @@ class MobiletechModule extends CrmModule
             'mobiletech-pending-charge-timeout',
             $this->getInstance(\Crm\MobiletechModule\Hermes\PendingChargeTimeoutHandler::class)
         );
+        $dispatcher->registerHandler(
+            'mobiletech-inbound',
+            $this->getInstance(\Crm\MobiletechModule\Hermes\UserConfirmationInboundHandler::class)
+        );
     }
 
     public function registerCommands(CommandsContainerInterface $commandsContainer)

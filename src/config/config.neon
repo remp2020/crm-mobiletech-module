@@ -35,6 +35,7 @@ services:
 
 	# Hermes
 	- Crm\MobiletechModule\Hermes\SendHandler
+	- Crm\MobiletechModule\Hermes\EmailConfirmationInboundHandler
 	mobiletechTestInboundHandler: Crm\MobiletechModule\Hermes\TestInboundHandler
 	- Crm\MobiletechModule\Hermes\PendingChargeTimeoutHandler
 
