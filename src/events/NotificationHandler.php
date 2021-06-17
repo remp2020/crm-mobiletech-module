@@ -158,7 +158,7 @@ class NotificationHandler extends AbstractListener
             $scheduleAt = $event->getScheduleAt()->getTimestamp();
         }
 
-        $this->hermesEmitter->emit(new HermesMessage('mobiletech-send', $payload, null, null, $scheduleAt));
+        $this->hermesEmitter->emit(new HermesMessage('mobiletech-send', $payload, null, null, $scheduleAt), HermesMessage::PRIORITY_DEFAULT);
     }
 
     private function getContent($templateContent, $params)

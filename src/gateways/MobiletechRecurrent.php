@@ -62,7 +62,7 @@ class MobiletechRecurrent extends Mobiletech implements RecurrentPaymentInterfac
 
         $this->hermesEmitter->emit(new HermesMessage('mobiletech-pending-charge-timeout', [
             'payment_id' => $payment->id,
-        ], null, null, DateTime::from('+15 minutes')->getTimestamp()));
+        ], null, null, DateTime::from('+15 minutes')->getTimestamp()), HermesMessage::PRIORITY_DEFAULT);
 
         return self::CHARGE_PENDING;
     }

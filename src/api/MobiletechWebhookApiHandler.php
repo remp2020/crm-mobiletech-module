@@ -110,7 +110,7 @@ class MobiletechWebhookApiHandler extends ApiHandler
 
         $this->emitter->emit(new HermesMessage('mobiletech-inbound', [
             'mobiletech_inbound_message_id' => $inboundMessage->id,
-        ]));
+        ]), HermesMessage::PRIORITY_DEFAULT);
 
         $result = [
             'id' => $inboundMessage->mobiletech_id,
