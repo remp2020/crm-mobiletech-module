@@ -25,12 +25,17 @@ class MobiletechAuthenticator implements AuthenticatorInterface
     /** @var string */
     private $password = null;
 
+    /** @var Passwords */
+    private $passwords;
+
     public function __construct(
         MobiletechPhoneNumbersRepository $mobiletechPhoneNumbersRepository,
-        ITranslator $translator
+        ITranslator $translator,
+        Passwords $passwords
     ) {
         $this->mobiletechPhoneNumbersRepository = $mobiletechPhoneNumbersRepository;
         $this->translator = $translator;
+        $this->passwords = $passwords;
     }
 
     public function setCredentials(array $credentials) : AuthenticatorInterface
@@ -76,7 +81,7 @@ class MobiletechAuthenticator implements AuthenticatorInterface
         }
         $user = $mobiletechPhoneNumber->user;
 
-        if (!Passwords::verify($this->password, $user[UserAuthenticator::COLUMN_PASSWORD_HASH])) {
+        if (!$this->passwords->verify($this->password, $user[UserAuthenticator::COLUMN_PASSWORD_HASH])) {
             throw new AuthenticationException($this->translator->translate('users.authenticator.invalid_credentials'), UserAuthenticator::INVALID_CREDENTIAL);
         }
 
