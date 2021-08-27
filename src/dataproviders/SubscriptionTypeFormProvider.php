@@ -45,8 +45,8 @@ class SubscriptionTypeFormProvider implements SubscriptionTypeFormProviderInterf
         $container = $form->addContainer('mobiletech');
         $container->addText('short_name', 'mobiletech.dataprovider.short_name.label')
             ->setOption('description', 'mobiletech.dataprovider.short_name.description')
-            ->setAttribute('placeholder', 'mobiletech.dataprovider.short_name.placeholder')
-            ->setAttribute('maxlength', 40)
+            ->setHtmlAttribute('placeholder', 'mobiletech.dataprovider.short_name.placeholder')
+            ->setHtmlAttribute('maxlength', 40)
             ->setRequired(false)
             ->addRule(function (TextInput $control) {
                 $value = $control->getValue();
