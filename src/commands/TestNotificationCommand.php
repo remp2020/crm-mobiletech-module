@@ -70,29 +70,29 @@ class TestNotificationCommand extends Command
         $userId = $input->getOption('user_id');
         if (!$userId) {
             $output->writeln("<error>missing option: --user_id=</error>");
-            return 1;
+            return Command::FAILURE;
         }
         $user = $this->usersRepository->find($userId);
         if (!$user) {
             $output->writeln("<error>user doesn't exist: {$userId}</error>");
-            return 1;
+            return Command::FAILURE;
         }
 
         $billKey = $input->getOption('bill_key');
         if (!$billKey) {
             $output->writeln("missing option: <error>--bill_key=</error>");
-            return 1;
+            return Command::FAILURE;
         }
 
         $templateCode = $input->getOption('template_code');
         if (!$templateCode) {
             $output->writeln("missing option: <error>--template_code=</error>");
-            return 1;
+            return Command::FAILURE;
         }
         $template = $this->mobiletechTemplatesRepository->findByCode($templateCode);
         if (!$template) {
             $output->writeln("<error>template doesn't exist: {$templateCode}</error>");
-            return 1;
+            return Command::FAILURE;
         }
 
         $inboundMessage = null;
@@ -100,7 +100,7 @@ class TestNotificationCommand extends Command
             $inboundMessage = $this->mobiletechInboundMessagesRepository->find($inboundId);
             if (!$inboundMessage) {
                 $output->writeln("<error>inbound message with provided id doesn't exist: {$inboundId}</error>");
-                return 1;
+                return Command::FAILURE;
             }
         }
 
@@ -112,6 +112,6 @@ class TestNotificationCommand extends Command
             $template->code
         ));
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
