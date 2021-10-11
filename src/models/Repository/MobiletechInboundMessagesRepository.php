@@ -5,7 +5,7 @@ namespace Crm\MobiletechModule\Repository;
 use Crm\ApplicationModule\Repository;
 use Crm\MobiletechModule\Models\DeliveryStatus;
 use Nette\Caching\Storage;
-use Nette\Database\Context;
+use Nette\Database\Explorer;
 use Nette\Database\Table\IRow;
 
 class MobiletechInboundMessagesRepository extends Repository
@@ -14,7 +14,7 @@ class MobiletechInboundMessagesRepository extends Repository
 
     private $deliveryStatus;
 
-    public function __construct(Context $database, DeliveryStatus $deliveryStatus, Storage $cacheStorage = null)
+    public function __construct(Explorer $database, DeliveryStatus $deliveryStatus, Storage $cacheStorage = null)
     {
         parent::__construct($database, $cacheStorage);
         $this->deliveryStatus = $deliveryStatus;

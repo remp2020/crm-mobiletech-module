@@ -7,7 +7,7 @@ use Crm\MobiletechModule\Events\OutboundMessageStatusUpdatedEvent;
 use Crm\MobiletechModule\Models\DeliveryStatus;
 use League\Event\Emitter;
 use Nette\Caching\Storage;
-use Nette\Database\Context;
+use Nette\Database\Explorer;
 use Nette\Database\Table\IRow;
 
 class MobiletechOutboundMessagesRepository extends Repository
@@ -19,7 +19,7 @@ class MobiletechOutboundMessagesRepository extends Repository
     private $deliveryStatus;
 
     public function __construct(
-        Context $database,
+        Explorer $database,
         Storage $cacheStorage,
         Emitter $emitter,
         DeliveryStatus $deliveryStatus
