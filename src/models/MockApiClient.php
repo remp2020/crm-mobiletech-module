@@ -3,7 +3,7 @@
 namespace Crm\MobiletechModule\Models;
 
 use Crm\MobiletechModule\Repository\MobiletechOutboundMessagesRepository;
-use Nette\Database\Table\IRow;
+use Nette\Database\Table\ActiveRow;
 use Ramsey\Uuid\Uuid;
 
 class MockApiClient implements ApiClientInterface
@@ -19,7 +19,7 @@ class MockApiClient implements ApiClientInterface
         $this->mobiletechOutboundMessagesRepository = $mobiletechOutboundMessagesRepository;
     }
 
-    public function send(IRow $mobiletechOutboundMessage, string $content)
+    public function send(ActiveRow $mobiletechOutboundMessage, string $content)
     {
         $this->mobiletechOutboundMessagesRepository->update($mobiletechOutboundMessage, [
             'mobiletech_id' => Uuid::uuid4()->toString(),

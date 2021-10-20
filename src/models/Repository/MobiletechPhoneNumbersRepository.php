@@ -4,7 +4,6 @@ namespace Crm\MobiletechModule\Repository;
 
 use Crm\ApplicationModule\Repository;
 use Nette\Database\Table\ActiveRow;
-use Nette\Database\Table\IRow;
 use Nette\Database\UniqueConstraintViolationException;
 use Nette\Utils\DateTime;
 
@@ -15,7 +14,7 @@ class MobiletechPhoneNumbersRepository extends Repository
     /**
      * @throws MobiletechAlreadyExistsException Thrown if phone number already exists.
      */
-    final public function add(string $mobilePhoneNumber, ActiveRow $user): IRow
+    final public function add(string $mobilePhoneNumber, ActiveRow $user): ActiveRow
     {
         $now = new DateTime();
 

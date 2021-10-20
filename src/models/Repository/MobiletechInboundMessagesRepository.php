@@ -6,7 +6,7 @@ use Crm\ApplicationModule\Repository;
 use Crm\MobiletechModule\Models\DeliveryStatus;
 use Nette\Caching\Storage;
 use Nette\Database\Explorer;
-use Nette\Database\Table\IRow;
+use Nette\Database\Table\ActiveRow;
 
 class MobiletechInboundMessagesRepository extends Repository
 {
@@ -21,7 +21,7 @@ class MobiletechInboundMessagesRepository extends Repository
     }
 
     final public function add(
-        ?IRow $user,
+        ?ActiveRow $user,
         string $mobiletechId,
         string $servId,
         string $projectId,
@@ -68,7 +68,7 @@ class MobiletechInboundMessagesRepository extends Repository
             ->fetch();
     }
 
-    final public function update(IRow &$row, $data)
+    final public function update(ActiveRow &$row, $data)
     {
         $data['updated_at'] = new \DateTime();
         return parent::update($row, $data);

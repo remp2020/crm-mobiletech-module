@@ -3,7 +3,7 @@
 namespace Crm\MobiletechModule\Repository;
 
 use Crm\ApplicationModule\Repository;
-use Nette\Database\Table\IRow;
+use Nette\Database\Table\ActiveRow;
 use Nette\Database\UniqueConstraintViolationException;
 use Nette\Utils\DateTime;
 
@@ -11,7 +11,7 @@ class MobiletechTemplatesRepository extends Repository
 {
     protected $tableName = 'mobiletech_templates';
 
-    public function add(string $code, string $content): IRow
+    public function add(string $code, string $content): ActiveRow
     {
         try {
             return $this->insert([
@@ -25,7 +25,7 @@ class MobiletechTemplatesRepository extends Repository
         }
     }
 
-    public function update(IRow &$row, $data)
+    public function update(ActiveRow &$row, $data)
     {
         $data['updated_at'] = new DateTime();
         return parent::update($row, $data);

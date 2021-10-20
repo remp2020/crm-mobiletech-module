@@ -7,7 +7,7 @@ use Crm\MobiletechModule\Authenticator\MobiletechAuthenticator;
 use Crm\MobiletechModule\Repository\MobiletechPhoneNumbersRepository;
 use Crm\UsersModule\Auth\UserAuthenticator;
 use Crm\UsersModule\Repository\UsersRepository;
-use Nette\Database\Table\IRow;
+use Nette\Database\Table\ActiveRow;
 use Nette\Security\AuthenticationException;
 
 class MobiletechAuthenticatorTest extends DatabaseTestCase
@@ -176,7 +176,7 @@ class MobiletechAuthenticatorTest extends DatabaseTestCase
         ];
     }
 
-    private function loadUser(string $email, string $password, ?string $phoneNumber = null, $role = UsersRepository::ROLE_USER, $active = true): IRow
+    private function loadUser(string $email, string $password, ?string $phoneNumber = null, $role = UsersRepository::ROLE_USER, $active = true): ActiveRow
     {
         $user = $this->usersRepository->getByEmail($email);
         if (!$user) {

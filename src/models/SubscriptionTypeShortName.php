@@ -4,7 +4,7 @@ namespace Crm\MobiletechModule\Models;
 
 use Crm\MobiletechModule\DataProvider\SubscriptionTypeFormProvider;
 use Crm\SubscriptionsModule\Repository\SubscriptionTypesMetaRepository;
-use Nette\Database\Table\IRow;
+use Nette\Database\Table\ActiveRow;
 use Nette\Utils\Strings;
 
 class SubscriptionTypeShortName
@@ -16,7 +16,7 @@ class SubscriptionTypeShortName
         $this->subscriptionTypesMetaRepository = $subscriptionTypesMetaRepository;
     }
 
-    public function getShortName(IRow $subscriptionType): string
+    public function getShortName(ActiveRow $subscriptionType): string
     {
         $shortName = $this->subscriptionTypesMetaRepository->getMetaValue($subscriptionType, SubscriptionTypeFormProvider::SUBSCRIPTION_TYPE_SHORT_NAME);
         if ($shortName) {

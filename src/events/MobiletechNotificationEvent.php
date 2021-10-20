@@ -4,7 +4,7 @@ namespace Crm\MobiletechModule\Events;
 
 use Crm\UsersModule\Events\NotificationEvent;
 use League\Event\Emitter;
-use Nette\Database\Table\IRow;
+use Nette\Database\Table\ActiveRow;
 
 /**
  * MobiletechNotificationEvent extends NotificationEvent for scenarios, when application needs to send notification
@@ -21,7 +21,7 @@ class MobiletechNotificationEvent extends NotificationEvent
     public function __construct(
         Emitter $emitter,
         MobiletechNotificationEnvelope $mobiletechEnvelope,
-        ?IRow $user,
+        ?ActiveRow $user,
         string $templateCode,
         array $params = [],
         string $context = null,
@@ -39,7 +39,7 @@ class MobiletechNotificationEvent extends NotificationEvent
         );
     }
 
-    public function getMobiletechInboundMessage(): ?IRow
+    public function getMobiletechInboundMessage(): ?ActiveRow
     {
         return $this->mobiletechEnvelope->getMobiletechInboundMessage();
     }
@@ -74,12 +74,12 @@ class MobiletechNotificationEvent extends NotificationEvent
         return $this->mobiletechEnvelope->getFromShortNumber();
     }
 
-    public function setMobiletechOutboundMessage(IRow $mobiletechOutboundMessage): void
+    public function setMobiletechOutboundMessage(ActiveRow $mobiletechOutboundMessage): void
     {
         $this->mobiletechOutboundMessage = $mobiletechOutboundMessage;
     }
 
-    public function getMobiletechOutboundMessage(): ?IRow
+    public function getMobiletechOutboundMessage(): ?ActiveRow
     {
         return $this->mobiletechOutboundMessage;
     }

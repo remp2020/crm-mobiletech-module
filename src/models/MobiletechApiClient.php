@@ -6,7 +6,7 @@ use Crm\ApiModule\Token\InternalToken;
 use Crm\ApplicationModule\Config\ApplicationConfig;
 use Crm\MobiletechModule\Repository\MobiletechOutboundMessagesRepository;
 use GuzzleHttp\Client;
-use Nette\Database\Table\IRow;
+use Nette\Database\Table\ActiveRow;
 use Spatie\ArrayToXml\ArrayToXml;
 
 class MobiletechApiClient implements ApiClientInterface
@@ -30,7 +30,7 @@ class MobiletechApiClient implements ApiClientInterface
     }
 
     public function send(
-        IRow $mobiletechOutboundMessage,
+        ActiveRow $mobiletechOutboundMessage,
         string $content
     ) {
 

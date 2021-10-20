@@ -2,12 +2,12 @@
 
 namespace Crm\MobiletechModule\Models;
 
-use Nette\Database\Table\IRow;
+use Nette\Database\Table\ActiveRow;
 
 interface ApiClientInterface
 {
     public function send(
-        IRow $mobiletechOutboundMessage,
+        ActiveRow $mobiletechOutboundMessage,
         string $content
     );
 }

@@ -6,7 +6,7 @@ use Crm\ApplicationModule\Authenticator\AuthenticatorInterface;
 use Crm\MobiletechModule\Repository\MobiletechPhoneNumbersRepository;
 use Crm\UsersModule\Auth\UserAuthenticator;
 use Crm\UsersModule\Events\UserSignInEvent;
-use Nette\Database\Table\IRow;
+use Nette\Database\Table\ActiveRow;
 use Nette\Localization\ITranslator;
 use Nette\Security\AuthenticationException;
 use Nette\Security\Passwords;
@@ -73,7 +73,7 @@ class MobiletechAuthenticator implements AuthenticatorInterface
         return false;
     }
 
-    private function process(): IRow
+    private function process(): ActiveRow
     {
         $mobiletechPhoneNumber = $this->mobiletechPhoneNumbersRepository->findByMobilePhoneNumber($this->mobilePhone);
         if (!$mobiletechPhoneNumber) {

@@ -2,7 +2,7 @@
 
 namespace Crm\MobiletechModule\Events;
 
-use Nette\Database\Table\IRow;
+use Nette\Database\Table\ActiveRow;
 
 class MobiletechNotificationEnvelope
 {
@@ -21,7 +21,7 @@ class MobiletechNotificationEnvelope
     private $billKey;
 
     public function __construct(
-        ?IRow $mobiletechInboundMessage,
+        ?ActiveRow $mobiletechInboundMessage,
         ?string $billKey = null,
         ?string $servId = null,
         ?string $fromShortNumber = null,
@@ -59,7 +59,7 @@ class MobiletechNotificationEnvelope
         }
     }
 
-    public function getMobiletechInboundMessage(): ?IRow
+    public function getMobiletechInboundMessage(): ?ActiveRow
     {
         return $this->mobiletechInboundMessage;
     }

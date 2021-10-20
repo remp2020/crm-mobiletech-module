@@ -8,7 +8,7 @@ use Crm\MobiletechModule\Models\DeliveryStatus;
 use League\Event\Emitter;
 use Nette\Caching\Storage;
 use Nette\Database\Explorer;
-use Nette\Database\Table\IRow;
+use Nette\Database\Table\ActiveRow;
 
 class MobiletechOutboundMessagesRepository extends Repository
 {
@@ -30,9 +30,9 @@ class MobiletechOutboundMessagesRepository extends Repository
     }
 
     public function add(
-        ?IRow $user,
+        ?ActiveRow $user,
         ?string $mobiletechId,
-        IRow $mobiletechTemplate,
+        ActiveRow $mobiletechTemplate,
         string $servId,
         ?string $projectId,
         ?string $rcvMsgId,
@@ -82,7 +82,7 @@ class MobiletechOutboundMessagesRepository extends Repository
             ->fetch();
     }
 
-    final public function findByPayment(IRow $payment)
+    final public function findByPayment(ActiveRow $payment)
     {
         return $payment->related('mobiletech_outbound_messages')
             ->order('created_at DESC')
@@ -98,7 +98,7 @@ class MobiletechOutboundMessagesRepository extends Repository
             ->fetch();
     }
 
-    final public function updateStatus(IRow $row, string $status)
+    final public function updateStatus(ActiveRow $row, string $status)
     {
         $this->update($row, [
             'status' => $status,
@@ -106,7 +106,7 @@ class MobiletechOutboundMessagesRepository extends Repository
         $this->emitter->emit(new OutboundMessageStatusUpdatedEvent($row));
     }
 
-    final public function update(IRow &$row, $data)
+    final public function update(ActiveRow &$row, $data)
     {
         $data['updated_at'] = new \DateTime();
         return parent::update($row, $data);
