@@ -7,7 +7,7 @@ use Crm\MobiletechModule\Repository\MobiletechPhoneNumbersRepository;
 use Crm\UsersModule\Auth\UserAuthenticator;
 use Crm\UsersModule\Events\UserSignInEvent;
 use Nette\Database\Table\ActiveRow;
-use Nette\Localization\ITranslator;
+use Nette\Localization\Translator;
 use Nette\Security\AuthenticationException;
 use Nette\Security\Passwords;
 
@@ -30,7 +30,7 @@ class MobiletechAuthenticator implements AuthenticatorInterface
 
     public function __construct(
         MobiletechPhoneNumbersRepository $mobiletechPhoneNumbersRepository,
-        ITranslator $translator,
+        Translator $translator,
         Passwords $passwords
     ) {
         $this->mobiletechPhoneNumbersRepository = $mobiletechPhoneNumbersRepository;
