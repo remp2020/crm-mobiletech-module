@@ -23,7 +23,7 @@ class MobiletechServerProxyApiHandler extends ApiHandler
         $this->applicationConfig = $applicationConfig;
     }
 
-    public function params()
+    public function params(): array
     {
         return [];
     }
