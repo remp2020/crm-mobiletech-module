@@ -5,7 +5,6 @@ namespace Crm\MobiletechModule\Api;
 use Crm\ApiModule\Api\ApiHandler;
 use Crm\ApiModule\Api\EmptyResponse;
 use Crm\ApiModule\Api\XmlResponse;
-use Crm\ApiModule\Authorization\ApiAuthorizationInterface;
 use Crm\ApiModule\Response\ApiResponseInterface;
 use Crm\ApplicationModule\Hermes\HermesMessage;
 use Crm\MobiletechModule\Repository\MobiletechInboundMessagesRepository;
@@ -69,7 +68,7 @@ class MobiletechWebhookApiHandler extends ApiHandler
         return [];
     }
 
-    public function handle(ApiAuthorizationInterface $authorization)
+    public function handle(array $params): ApiResponseInterface
     {
         $rawPayload = $this->rawPayload();
         $payload = new \SimpleXMLElement($rawPayload);
