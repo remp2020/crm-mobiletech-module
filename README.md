@@ -40,7 +40,7 @@ $this->emitter->emit(new MobiletechNotificationEvent(
 
 Outbound message expect a `mobiletech_template` to be provided. Content is processed as a `twig` template and can be injected with variables provided as parameters within `MobiletechNotificationEvent`. 
 
-Please check [`MobiletechNotificationEvent`](./src/events/MobiletechNotificationEvent.php) and [`MobiletechNotificationEnvelope`](./src/events/MobiletechNotificationEnvelope.php) to understand the provided parameters and context.
+Please check [`MobiletechNotificationEvent`](./src/Events/MobiletechNotificationEvent.php) and [`MobiletechNotificationEnvelope`](./src/Events/MobiletechNotificationEnvelope.php) to understand the provided parameters and context.
 
 ## MobiletechAuthenticator
 

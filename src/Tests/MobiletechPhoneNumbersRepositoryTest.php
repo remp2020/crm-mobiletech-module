@@ -89,7 +89,7 @@ class MobiletechPhoneNumbersRepositoryTest extends DatabaseTestCase
     {
         $user = $this->usersRepository->getByEmail($email);
         if (!$user) {
-            $user = $this->usersRepository->add($email, $password, '', '', $role, (int)$active);
+            $user = $this->usersRepository->add($email, $password, $role, (int)$active);
         }
 
         return $user;
