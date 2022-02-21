@@ -1,16 +1,16 @@
 config:
-    mobiletech_gateway_url_production:
-        name: "Mobiletech URL sms brány (produkčná)"
-        description: "URL spracúvajúca odoslané správy (napr. <code>http://127.0.0.1:1234/</code>)"
-    mobiletech_gateway_url_test:
-        name: "Mobiletech URL sms brány (testovacia)"
-        description: "URL spracúvajúca <strong>testovacie</strong> správy odoslané na internú <code>MobiletechServerProxy</code> (napr. <code>http://127.0.0.1:1234/</code>)"
-    mobiletech_billkey_free:
-        name: "Billing key pre nespoplatnené správy"
-        description: "Billing key, ktorý bude použitý pri všeobecných notifikáciach a nespoplatnených správach odoslaných používateľovi (napr. <code>AZ19</code>)"
+	mobiletech_gateway_url_production:
+		name: "Mobiletech URL sms brány (produkčná)"
+		description: "URL spracúvajúca odoslané správy (napr. <code>http://127.0.0.1:1234/</code>)"
+	mobiletech_gateway_url_test:
+		name: "Mobiletech URL sms brány (testovacia)"
+		description: "URL spracúvajúca <strong>testovacie</strong> správy odoslané na internú <code>MobiletechServerProxy</code> (napr. <code>http://127.0.0.1:1234/</code>)"
+	mobiletech_billkey_free:
+		name: "Billing key pre nespoplatnené správy"
+		description: "Billing key, ktorý bude použitý pri všeobecných notifikáciach a nespoplatnených správach odoslaných používateľovi (napr. <code>AZ19</code>)"
 dataprovider:
-    short_name:
-        label: Krátky názov pre SMS
-        placeholder: 'napríklad "Print na mesiac"'
-        description: 'Krátky názov predplatného (maximálne 40 znakov) bez diakritiky, ktorý sa bude posielať napr. cez SMS . Ak nie je špecifikovaný, použije sa Verejný popis.'
-        error_diacritics: 'Krátky názov nemôže obsahovať diakritiku'
+	short_name:
+		label: Krátky názov pre SMS
+		placeholder: 'napríklad "Print na mesiac"'
+		description: 'Krátky názov predplatného (maximálne 40 znakov) bez diakritiky, ktorý sa bude posielať napr. cez SMS . Ak nie je špecifikovaný, použije sa Verejný popis.'
+		error_diacritics: 'Krátky názov nemôže obsahovať diakritiku'
