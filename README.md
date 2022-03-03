@@ -1,5 +1,7 @@
 # Mobiletech Module
 
+[![Translation status @ Weblate](https://hosted.weblate.org/widgets/remp-crm/-/mobiletech-module/svg-badge.svg)](https://hosted.weblate.org/projects/remp-crm/mobiletech-module/)
+
 ---
 
 _**WARNING: This is experimental WIP module. We do not recommend using this module in production.**_
