@@ -3,11 +3,11 @@
 namespace Crm\MobiletechModule\Api;
 
 use Crm\ApiModule\Api\ApiHandler;
-use Crm\ApiModule\Response\ApiResponseInterface;
 use Crm\ApiModule\Token\InternalToken;
 use Crm\ApplicationModule\Config\ApplicationConfig;
 use Crm\MobiletechModule\Models\Config;
 use GuzzleHttp\Client;
+use Tomaj\NetteApi\Response\ResponseInterface;
 
 /**
  * Mobiletech only allows whitelisted set of IPs to make a request to SMS gateway. To circumvent this limitation
@@ -28,7 +28,7 @@ class MobiletechServerProxyApiHandler extends ApiHandler
         return [];
     }
 
-    public function handle(array $params): ApiResponseInterface
+    public function handle(array $params): ResponseInterface
     {
         $rawXmlPayload = file_get_contents('php://input');
 

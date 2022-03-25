@@ -13,6 +13,7 @@ use Crm\MobiletechModule\Repository\MobiletechPhoneNumbersRepository;
 use Nette\Http\Response;
 use Nette\Utils\DateTime;
 use Tomaj\Hermes\Emitter;
+use Tomaj\NetteApi\Response\ResponseInterface;
 use Tracy\Debugger;
 use Tracy\ILogger;
 
@@ -68,7 +69,7 @@ class MobiletechWebhookApiHandler extends ApiHandler
         return [];
     }
 
-    public function handle(array $params): ApiResponseInterface
+    public function handle(array $params): ResponseInterface
     {
         $rawPayload = $this->rawPayload();
         $payload = new \SimpleXMLElement($rawPayload);
@@ -118,7 +119,7 @@ class MobiletechWebhookApiHandler extends ApiHandler
         $response = new XmlResponse($result, 'message', [
             'command' => 'rcv_rsp',
         ]);
-        $response->setHttpCode(Response::S200_OK);
+        $response->setCode(Response::S200_OK);
         return $response;
     }
 
@@ -132,7 +133,7 @@ class MobiletechWebhookApiHandler extends ApiHandler
         if (!$outbound) {
             Debugger::log("Mobiletech status command referencing outbound message that doesn't exist: ". $payload->id, ILogger::WARNING);
             $response = new EmptyResponse();
-            $response->setHttpCode(Response::S404_NOT_FOUND);
+            $response->setCode(Response::S404_NOT_FOUND);
             return $response;
         }
 
@@ -144,7 +145,7 @@ class MobiletechWebhookApiHandler extends ApiHandler
         $response = new XmlResponse($result, 'message', [
             'command' => 'status_rsp',
         ]);
-        $response->setHttpCode(Response::S200_OK);
+        $response->setCode(Response::S200_OK);
         return $response;
     }
 }
