@@ -2,10 +2,10 @@
 
 namespace Crm\MobiletechModule\DI;
 
-use Kdyby\Translation\DI\ITranslationProvider;
+use Contributte\Translation\DI\TranslationProviderInterface;
 use Nette\DI\CompilerExtension;
 
-final class MobiletechModuleExtension extends CompilerExtension implements ITranslationProvider
+final class MobiletechModuleExtension extends CompilerExtension implements TranslationProviderInterface
 {
     public function loadConfiguration()
     {
@@ -19,7 +19,7 @@ final class MobiletechModuleExtension extends CompilerExtension implements ITran
      * Return array of directories, that contain resources for translator.
      * @return string[]
      */
-    public function getTranslationResources()
+    public function getTranslationResources(): array
     {
         return [__DIR__ . '/../lang/'];
     }
