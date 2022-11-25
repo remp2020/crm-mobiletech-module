@@ -66,13 +66,20 @@ class SubscriptionTypeFormProvider implements SubscriptionTypeFormProviderInterf
 
     public function formSucceeded($form, $values)
     {
-        $subscriptionType = $this->subscriptionTypesRepository->findBy('code', $values->code);
-
-        if ($values->mobiletech->short_name) {
-            $this->subscriptionTypesMetaRepository->setMeta($subscriptionType, self::SUBSCRIPTION_TYPE_SHORT_NAME, Strings::toAscii($values->mobiletech->short_name));
-        } else {
-            $this->subscriptionTypesMetaRepository->removeMeta($subscriptionType->id, self::SUBSCRIPTION_TYPE_SHORT_NAME);
+        if (!isset($values->subscription_type_id)) {
+            return [$form, $values];
         }
+
+        $subscriptionType = $this->subscriptionTypesRepository->find($values->subscription_type_id);
+
+        if ($subscriptionType) {
+            if ($values->mobiletech->short_name) {
+                $this->subscriptionTypesMetaRepository->setMeta($subscriptionType, self::SUBSCRIPTION_TYPE_SHORT_NAME, Strings::toAscii($values->mobiletech->short_name));
+            } else {
+                $this->subscriptionTypesMetaRepository->removeMeta($subscriptionType->id, self::SUBSCRIPTION_TYPE_SHORT_NAME);
+            }
+        }
+
         unset($values->mobiletech);
         return [$form, $values];
     }
