@@ -3,12 +3,12 @@
 namespace Crm\MobiletechModule\DataProvider;
 
 use Crm\ApplicationModule\DataProvider\DataProviderException;
-use Crm\ApplicationModule\Selection;
 use Crm\SubscriptionsModule\DataProvider\SubscriptionTypeFormProviderInterface;
 use Crm\SubscriptionsModule\Repository\SubscriptionTypesMetaRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionTypesRepository;
 use Nette\Application\UI\Form;
 use Nette\Forms\Controls\TextInput;
+use Nette\Utils\ArrayHash;
 use Nette\Utils\Strings;
 
 class SubscriptionTypeFormProvider implements SubscriptionTypeFormProviderInterface
@@ -28,8 +28,6 @@ class SubscriptionTypeFormProvider implements SubscriptionTypeFormProviderInterf
     }
 
     /**
-     * @param array $params
-     * @return Selection
      * @throws DataProviderException
      */
     public function provide(array $params): Form
@@ -64,7 +62,7 @@ class SubscriptionTypeFormProvider implements SubscriptionTypeFormProviderInterf
         return $form;
     }
 
-    public function formSucceeded($form, $values)
+    public function formSucceeded(Form $form, ArrayHash $values)
     {
         if (!isset($values->subscription_type_id)) {
             return [$form, $values];
