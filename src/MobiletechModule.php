@@ -17,7 +17,6 @@ use Crm\MobiletechModule\Api\MobiletechWebhookApiHandler;
 use Crm\MobiletechModule\Commands\TestNotificationCommand;
 use Crm\MobiletechModule\Seeders\ConfigsSeeder;
 use Crm\MobiletechModule\Seeders\PaymentGatewaysSeeder;
-use League\Event\Emitter;
 use Tomaj\Hermes\Dispatcher;
 
 class MobiletechModule extends CrmModule
@@ -46,19 +45,19 @@ class MobiletechModule extends CrmModule
         $seederManager->addSeeder($this->getInstance(PaymentGatewaysSeeder::class));
     }
 
-    public function registerEventHandlers(Emitter $emitter)
+    public function registerLazyEventHandlers(\Crm\ApplicationModule\Event\LazyEventEmitter $emitter)
     {
         $emitter->addListener(
             \Crm\UsersModule\Events\NotificationEvent::class,
-            $this->getInstance(\Crm\MobiletechModule\Events\NotificationHandler::class)
+            \Crm\MobiletechModule\Events\NotificationHandler::class
         );
         $emitter->addListener(
             \Crm\MobiletechModule\Events\MobiletechNotificationEvent::class,
-            $this->getInstance(\Crm\MobiletechModule\Events\NotificationHandler::class)
+            \Crm\MobiletechModule\Events\NotificationHandler::class
         );
         $emitter->addListener(
             \Crm\MobiletechModule\Events\OutboundMessageStatusUpdatedEvent::class,
-            $this->getInstance(\Crm\MobiletechModule\Events\ConfirmPaymentHandler::class)
+            \Crm\MobiletechModule\Events\ConfirmPaymentHandler::class
         );
     }
 
