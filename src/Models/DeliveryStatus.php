@@ -52,7 +52,7 @@ class DeliveryStatus
         ];
     }
 
-    private function getBillingStatus($code): int
+    private function getBillingStatus($code): string
     {
         if (0 === $code) {
             return self::BILLED;
