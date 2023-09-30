@@ -106,13 +106,13 @@ class MobiletechRecurrent extends Mobiletech implements RecurrentPaymentInterfac
         return $this->outboundMessage;
     }
 
-    public function getResultCode()
+    public function getResultCode(): ?string
     {
         // message is sent asynchronously
         return self::CHARGE_PENDING;
     }
 
-    public function getResultMessage()
+    public function getResultMessage(): ?string
     {
         // message is sent asynchronously
         return self::CHARGE_PENDING;
