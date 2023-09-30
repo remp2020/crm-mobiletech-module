@@ -8,8 +8,8 @@ use League\Event\EventInterface;
 
 class TestMobiletechNotificationHandler extends AbstractListener
 {
-    /** @var MobiletechNotificationEvent[<string>][]  */
-    private $notifications = [];
+    /** @var array<MobiletechNotificationEvent[]>  */
+    private array $notifications = [];
 
     public function handle(EventInterface $event)
     {
