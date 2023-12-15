@@ -9,6 +9,7 @@ use Crm\UsersModule\Auth\UserAuthenticator;
 use Crm\UsersModule\Repository\UsersRepository;
 use Nette\Database\Table\ActiveRow;
 use Nette\Security\AuthenticationException;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class MobiletechAuthenticatorTest extends DatabaseTestCase
 {
@@ -52,9 +53,7 @@ class MobiletechAuthenticatorTest extends DatabaseTestCase
         $this->usersRepository = $this->inject(UsersRepository::class);
     }
 
-    /**
-     * @dataProvider validCredentialProvider
-     */
+    #[DataProvider('validCredentialProvider')]
     public function testValidCredentialsUserFound($credentials)
     {
         $user = $this->loadUser(
@@ -68,7 +67,7 @@ class MobiletechAuthenticatorTest extends DatabaseTestCase
         $this->assertEquals($user->id, $authenticatedUser->id);
     }
 
-    public function validCredentialProvider(): array
+    public static function validCredentialProvider(): array
     {
         return [
             [[
@@ -99,9 +98,7 @@ class MobiletechAuthenticatorTest extends DatabaseTestCase
     }
 
 
-    /**
-     * @dataProvider missingCredentialProvider
-     */
+    #[DataProvider('missingCredentialProvider')]
     public function testMissingCredentials($credentials)
     {
         $this->mobiletechAuthenticator->setCredentials($credentials);
@@ -110,7 +107,7 @@ class MobiletechAuthenticatorTest extends DatabaseTestCase
         $this->assertFalse($user);
     }
 
-    public function missingCredentialProvider(): array
+    public static function missingCredentialProvider(): array
     {
         return [
             // all missing
@@ -129,9 +126,7 @@ class MobiletechAuthenticatorTest extends DatabaseTestCase
         ];
     }
 
-    /**
-     * @dataProvider invalidCredentialProvider
-     */
+    #[DataProvider('invalidCredentialProvider')]
     public function testInvalidCredentials($credentials, $authExceptionCode)
     {
         $user = $this->loadUser(
@@ -146,7 +141,7 @@ class MobiletechAuthenticatorTest extends DatabaseTestCase
         $user = $this->mobiletechAuthenticator->authenticate();
     }
 
-    public function invalidCredentialProvider(): array
+    public static function invalidCredentialProvider(): array
     {
         return [
             // invalid only password
