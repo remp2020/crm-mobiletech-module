@@ -2,7 +2,7 @@
 
 namespace Crm\MobiletechModule\Models;
 
-use Crm\ApiModule\Token\InternalToken;
+use Crm\ApiModule\Models\Token\InternalToken;
 use Crm\ApplicationModule\Config\ApplicationConfig;
 use Crm\MobiletechModule\Repository\MobiletechOutboundMessagesRepository;
 use GuzzleHttp\Client;

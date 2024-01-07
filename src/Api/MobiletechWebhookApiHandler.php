@@ -2,10 +2,10 @@
 
 namespace Crm\MobiletechModule\Api;
 
-use Crm\ApiModule\Api\ApiHandler;
-use Crm\ApiModule\Api\EmptyResponse;
-use Crm\ApiModule\Api\XmlResponse;
-use Crm\ApiModule\Response\ApiResponseInterface;
+use Crm\ApiModule\Models\Api\ApiHandler;
+use Crm\ApiModule\Models\Response\ApiResponseInterface;
+use Crm\ApiModule\Models\Response\EmptyResponse;
+use Crm\ApiModule\Models\Response\XmlResponse;
 use Crm\ApplicationModule\Hermes\HermesMessage;
 use Crm\MobiletechModule\Repository\MobiletechInboundMessagesRepository;
 use Crm\MobiletechModule\Repository\MobiletechOutboundMessagesRepository;

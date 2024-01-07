@@ -2,8 +2,8 @@
 
 namespace Crm\MobiletechModule\Api;
 
-use Crm\ApiModule\Api\ApiHandler;
-use Crm\ApiModule\Token\InternalToken;
+use Crm\ApiModule\Models\Api\ApiHandler;
+use Crm\ApiModule\Models\Token\InternalToken;
 use Crm\ApplicationModule\Config\ApplicationConfig;
 use Crm\MobiletechModule\Models\Config;
 use GuzzleHttp\Client;
