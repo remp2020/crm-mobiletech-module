@@ -1,6 +1,6 @@
 <?php
 
-namespace Crm\MobiletechModule\Repository;
+namespace Crm\MobiletechModule\Repositories;
 
 use Nette\Database\UniqueConstraintViolationException;
 

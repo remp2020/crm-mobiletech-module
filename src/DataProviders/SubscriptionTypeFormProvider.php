@@ -1,6 +1,6 @@
 <?php
 
-namespace Crm\MobiletechModule\DataProvider;
+namespace Crm\MobiletechModule\DataProviders;
 
 use Crm\ApplicationModule\DataProvider\DataProviderException;
 use Crm\SubscriptionsModule\DataProvider\SubscriptionTypeFormProviderInterface;
