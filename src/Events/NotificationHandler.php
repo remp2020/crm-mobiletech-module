@@ -13,6 +13,8 @@ use Crm\UsersModule\Events\NotificationEvent;
 use League\Event\AbstractListener;
 use League\Event\EventInterface;
 use Tomaj\Hermes\Emitter;
+use Twig\Environment;
+use Twig\Loader\ArrayLoader;
 
 class NotificationHandler extends AbstractListener
 {
@@ -163,10 +165,10 @@ class NotificationHandler extends AbstractListener
 
     private function getContent($templateContent, $params)
     {
-        $loader = new \Twig\Loader\ArrayLoader([
+        $loader = new ArrayLoader([
             'template' => $templateContent,
         ]);
-        $twig = new \Twig\Environment($loader);
+        $twig = new Environment($loader);
         return $twig->render('template', $params);
     }
 }

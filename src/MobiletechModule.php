@@ -11,12 +11,23 @@ use Crm\ApplicationModule\Authenticator\AuthenticatorManagerInterface;
 use Crm\ApplicationModule\Commands\CommandsContainerInterface;
 use Crm\ApplicationModule\CrmModule;
 use Crm\ApplicationModule\DataProvider\DataProviderManager;
+use Crm\ApplicationModule\Event\LazyEventEmitter;
 use Crm\ApplicationModule\SeederManager;
 use Crm\MobiletechModule\Api\MobiletechServerProxyApiHandler;
 use Crm\MobiletechModule\Api\MobiletechWebhookApiHandler;
+use Crm\MobiletechModule\Authenticator\MobiletechAuthenticator;
 use Crm\MobiletechModule\Commands\TestNotificationCommand;
+use Crm\MobiletechModule\DataProvider\SubscriptionTypeFormProvider;
+use Crm\MobiletechModule\Events\ConfirmPaymentHandler;
+use Crm\MobiletechModule\Events\MobiletechNotificationEvent;
+use Crm\MobiletechModule\Events\NotificationHandler;
+use Crm\MobiletechModule\Events\OutboundMessageStatusUpdatedEvent;
+use Crm\MobiletechModule\Hermes\PendingChargeTimeoutHandler;
+use Crm\MobiletechModule\Hermes\SendHandler;
+use Crm\MobiletechModule\Hermes\UserConfirmationInboundHandler;
 use Crm\MobiletechModule\Seeders\ConfigsSeeder;
 use Crm\MobiletechModule\Seeders\PaymentGatewaysSeeder;
+use Crm\UsersModule\Events\NotificationEvent;
 use Tomaj\Hermes\Dispatcher;
 
 class MobiletechModule extends CrmModule
@@ -24,7 +35,7 @@ class MobiletechModule extends CrmModule
     public function registerAuthenticators(AuthenticatorManagerInterface $authenticatorManager)
     {
         $authenticatorManager->registerAuthenticator(
-            $this->getInstance(\Crm\MobiletechModule\Authenticator\MobiletechAuthenticator::class),
+            $this->getInstance(MobiletechAuthenticator::class),
             200
         );
     }
@@ -45,19 +56,19 @@ class MobiletechModule extends CrmModule
         $seederManager->addSeeder($this->getInstance(PaymentGatewaysSeeder::class));
     }
 
-    public function registerLazyEventHandlers(\Crm\ApplicationModule\Event\LazyEventEmitter $emitter)
+    public function registerLazyEventHandlers(LazyEventEmitter $emitter)
     {
         $emitter->addListener(
-            \Crm\UsersModule\Events\NotificationEvent::class,
-            \Crm\MobiletechModule\Events\NotificationHandler::class
+            NotificationEvent::class,
+            NotificationHandler::class
         );
         $emitter->addListener(
-            \Crm\MobiletechModule\Events\MobiletechNotificationEvent::class,
-            \Crm\MobiletechModule\Events\NotificationHandler::class
+            MobiletechNotificationEvent::class,
+            NotificationHandler::class
         );
         $emitter->addListener(
-            \Crm\MobiletechModule\Events\OutboundMessageStatusUpdatedEvent::class,
-            \Crm\MobiletechModule\Events\ConfirmPaymentHandler::class
+            OutboundMessageStatusUpdatedEvent::class,
+            ConfirmPaymentHandler::class
         );
     }
 
@@ -65,15 +76,15 @@ class MobiletechModule extends CrmModule
     {
         $dispatcher->registerHandler(
             'mobiletech-send',
-            $this->getInstance(\Crm\MobiletechModule\Hermes\SendHandler::class)
+            $this->getInstance(SendHandler::class)
         );
         $dispatcher->registerHandler(
             'mobiletech-pending-charge-timeout',
-            $this->getInstance(\Crm\MobiletechModule\Hermes\PendingChargeTimeoutHandler::class)
+            $this->getInstance(PendingChargeTimeoutHandler::class)
         );
         $dispatcher->registerHandler(
             'mobiletech-inbound',
-            $this->getInstance(\Crm\MobiletechModule\Hermes\UserConfirmationInboundHandler::class)
+            $this->getInstance(UserConfirmationInboundHandler::class)
         );
     }
 
@@ -86,7 +97,7 @@ class MobiletechModule extends CrmModule
     {
         $dataProviderManager->registerDataProvider(
             'subscriptions.dataprovider.subscription_type_form',
-            $this->getInstance(\Crm\MobiletechModule\DataProvider\SubscriptionTypeFormProvider::class)
+            $this->getInstance(SubscriptionTypeFormProvider::class)
         );
     }
 }
