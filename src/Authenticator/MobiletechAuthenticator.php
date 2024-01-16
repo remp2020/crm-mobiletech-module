@@ -3,7 +3,7 @@
 namespace Crm\MobiletechModule\Authenticator;
 
 use Crm\ApplicationModule\Authenticator\AuthenticatorInterface;
-use Crm\MobiletechModule\Repository\MobiletechPhoneNumbersRepository;
+use Crm\MobiletechModule\Repositories\MobiletechPhoneNumbersRepository;
 use Crm\UsersModule\Auth\UserAuthenticator;
 use Crm\UsersModule\Events\UserSignInEvent;
 use Nette\Database\Table\ActiveRow;

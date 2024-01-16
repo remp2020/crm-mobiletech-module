@@ -2,7 +2,7 @@
 
 namespace Crm\MobiletechModule\Models;
 
-use Crm\MobiletechModule\DataProvider\SubscriptionTypeFormProvider;
+use Crm\MobiletechModule\DataProviders\SubscriptionTypeFormProvider;
 use Crm\SubscriptionsModule\Repository\SubscriptionTypesMetaRepository;
 use Nette\Database\Table\ActiveRow;
 use Nette\Utils\Strings;

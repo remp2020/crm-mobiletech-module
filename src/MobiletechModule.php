@@ -17,7 +17,7 @@ use Crm\MobiletechModule\Api\MobiletechServerProxyApiHandler;
 use Crm\MobiletechModule\Api\MobiletechWebhookApiHandler;
 use Crm\MobiletechModule\Authenticator\MobiletechAuthenticator;
 use Crm\MobiletechModule\Commands\TestNotificationCommand;
-use Crm\MobiletechModule\DataProvider\SubscriptionTypeFormProvider;
+use Crm\MobiletechModule\DataProviders\SubscriptionTypeFormProvider;
 use Crm\MobiletechModule\Events\ConfirmPaymentHandler;
 use Crm\MobiletechModule\Events\MobiletechNotificationEvent;
 use Crm\MobiletechModule\Events\NotificationHandler;

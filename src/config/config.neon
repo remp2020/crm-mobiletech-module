@@ -31,7 +31,7 @@ services:
 	- Crm\MobiletechModule\Gateways\MobiletechRecurrent
 
 	# Data providers
-	- Crm\MobiletechModule\DataProvider\SubscriptionTypeFormProvider
+	- Crm\MobiletechModule\DataProviders\SubscriptionTypeFormProvider
 
 	# Hermes
 	- Crm\MobiletechModule\Hermes\SendHandler
@@ -40,10 +40,10 @@ services:
 	- Crm\MobiletechModule\Hermes\PendingChargeTimeoutHandler
 
 	# Repositories
-	mobiletechPhoneNumbersRepository: Crm\MobiletechModule\Repository\MobiletechPhoneNumbersRepository
-	mobiletechInboundMessagesRepository: Crm\MobiletechModule\Repository\MobiletechInboundMessagesRepository
-	mobiletechOutboundMessagesRepository: Crm\MobiletechModule\Repository\MobiletechOutboundMessagesRepository
-	mobiletechTemplatesRepository: Crm\MobiletechModule\Repository\MobiletechTemplatesRepository
+	mobiletechPhoneNumbersRepository: Crm\MobiletechModule\Repositories\MobiletechPhoneNumbersRepository
+	mobiletechInboundMessagesRepository: Crm\MobiletechModule\Repositories\MobiletechInboundMessagesRepository
+	mobiletechOutboundMessagesRepository: Crm\MobiletechModule\Repositories\MobiletechOutboundMessagesRepository
+	mobiletechTemplatesRepository: Crm\MobiletechModule\Repositories\MobiletechTemplatesRepository
 
 	# Seeders
 	- Crm\MobiletechModule\Seeders\ConfigsSeeder

@@ -3,7 +3,7 @@
 namespace Crm\MobiletechModule\Hermes;
 
 use Crm\MobiletechModule\Models\ApiClientInterface;
-use Crm\MobiletechModule\Repository\MobiletechOutboundMessagesRepository;
+use Crm\MobiletechModule\Repositories\MobiletechOutboundMessagesRepository;
 use Tomaj\Hermes\Handler\HandlerInterface;
 use Tomaj\Hermes\MessageInterface;
 use Tracy\Debugger;

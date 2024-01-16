@@ -4,8 +4,8 @@ namespace Crm\MobiletechModule\Hermes;
 
 use Crm\MobiletechModule\Events\MobiletechNotificationEnvelope;
 use Crm\MobiletechModule\Events\MobiletechNotificationEvent;
-use Crm\MobiletechModule\Repository\MobiletechInboundMessagesRepository;
-use Crm\MobiletechModule\Repository\MobiletechTemplatesRepository;
+use Crm\MobiletechModule\Repositories\MobiletechInboundMessagesRepository;
+use Crm\MobiletechModule\Repositories\MobiletechTemplatesRepository;
 use Crm\PaymentsModule\PaymentProcessor;
 use Crm\PaymentsModule\Repository\PaymentsRepository;
 use League\Event\Emitter;

@@ -2,7 +2,7 @@
 
 namespace Crm\MobiletechModule\Hermes;
 
-use Crm\MobiletechModule\Repository\MobiletechOutboundMessagesRepository;
+use Crm\MobiletechModule\Repositories\MobiletechOutboundMessagesRepository;
 use Crm\PaymentsModule\RecurrentPaymentsProcessor;
 use Crm\PaymentsModule\Repository\PaymentsRepository;
 use Crm\PaymentsModule\Repository\RecurrentPaymentsRepository;

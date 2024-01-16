@@ -4,7 +4,7 @@ namespace Crm\MobiletechModule\Tests;
 
 use Crm\ApplicationModule\Tests\DatabaseTestCase;
 use Crm\MobiletechModule\Authenticator\MobiletechAuthenticator;
-use Crm\MobiletechModule\Repository\MobiletechPhoneNumbersRepository;
+use Crm\MobiletechModule\Repositories\MobiletechPhoneNumbersRepository;
 use Crm\UsersModule\Auth\UserAuthenticator;
 use Crm\UsersModule\Repository\UsersRepository;
 use Nette\Database\Table\ActiveRow;

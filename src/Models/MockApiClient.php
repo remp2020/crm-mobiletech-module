@@ -2,7 +2,7 @@
 
 namespace Crm\MobiletechModule\Models;
 
-use Crm\MobiletechModule\Repository\MobiletechOutboundMessagesRepository;
+use Crm\MobiletechModule\Repositories\MobiletechOutboundMessagesRepository;
 use Nette\Database\Table\ActiveRow;
 use Ramsey\Uuid\Uuid;
 

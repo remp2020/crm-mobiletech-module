@@ -2,7 +2,7 @@
 
 namespace Crm\MobiletechModule\Hermes;
 
-use Crm\MobiletechModule\Repository\MobiletechInboundMessagesRepository;
+use Crm\MobiletechModule\Repositories\MobiletechInboundMessagesRepository;
 use Crm\UsersModule\Auth\UserManager;
 use Crm\UsersModule\Repository\UsersRepository;
 use Tomaj\Hermes\Handler\HandlerInterface;

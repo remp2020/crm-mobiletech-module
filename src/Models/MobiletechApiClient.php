@@ -4,7 +4,7 @@ namespace Crm\MobiletechModule\Models;
 
 use Crm\ApiModule\Models\Token\InternalToken;
 use Crm\ApplicationModule\Config\ApplicationConfig;
-use Crm\MobiletechModule\Repository\MobiletechOutboundMessagesRepository;
+use Crm\MobiletechModule\Repositories\MobiletechOutboundMessagesRepository;
 use GuzzleHttp\Client;
 use Nette\Database\Table\ActiveRow;
 use Spatie\ArrayToXml\ArrayToXml;

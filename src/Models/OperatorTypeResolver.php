@@ -3,8 +3,8 @@
 namespace Crm\MobiletechModule\Models;
 
 use Crm\MobiletechModule\Authenticator\MobiletechAuthenticator;
-use Crm\MobiletechModule\Repository\MobiletechInboundMessagesRepository;
-use Crm\MobiletechModule\Repository\MobiletechOutboundMessagesRepository;
+use Crm\MobiletechModule\Repositories\MobiletechInboundMessagesRepository;
+use Crm\MobiletechModule\Repositories\MobiletechOutboundMessagesRepository;
 use Nette\Utils\Strings;
 
 class OperatorTypeResolver
