@@ -3,9 +3,9 @@
 namespace Crm\MobiletechModule\DataProviders;
 
 use Crm\ApplicationModule\DataProvider\DataProviderException;
-use Crm\SubscriptionsModule\DataProvider\SubscriptionTypeFormProviderInterface;
-use Crm\SubscriptionsModule\Repository\SubscriptionTypesMetaRepository;
-use Crm\SubscriptionsModule\Repository\SubscriptionTypesRepository;
+use Crm\SubscriptionsModule\DataProviders\SubscriptionTypeFormProviderInterface;
+use Crm\SubscriptionsModule\Repositories\SubscriptionTypesMetaRepository;
+use Crm\SubscriptionsModule\Repositories\SubscriptionTypesRepository;
 use Nette\Application\UI\Form;
 use Nette\Forms\Controls\TextInput;
 use Nette\Utils\ArrayHash;
