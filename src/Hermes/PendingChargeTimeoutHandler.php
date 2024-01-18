@@ -3,9 +3,9 @@
 namespace Crm\MobiletechModule\Hermes;
 
 use Crm\MobiletechModule\Repositories\MobiletechOutboundMessagesRepository;
-use Crm\PaymentsModule\RecurrentPaymentsProcessor;
-use Crm\PaymentsModule\Repository\PaymentsRepository;
-use Crm\PaymentsModule\Repository\RecurrentPaymentsRepository;
+use Crm\PaymentsModule\Models\RecurrentPaymentsProcessor;
+use Crm\PaymentsModule\Repositories\PaymentsRepository;
+use Crm\PaymentsModule\Repositories\RecurrentPaymentsRepository;
 use Tomaj\Hermes\Handler\HandlerInterface;
 use Tomaj\Hermes\MessageInterface;
 use Tracy\Debugger;

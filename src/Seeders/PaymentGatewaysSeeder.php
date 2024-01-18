@@ -5,7 +5,7 @@ namespace Crm\MobiletechModule\Seeders;
 use Crm\ApplicationModule\Seeders\ISeeder;
 use Crm\MobiletechModule\Gateways\Mobiletech;
 use Crm\MobiletechModule\Gateways\MobiletechRecurrent;
-use Crm\PaymentsModule\Repository\PaymentGatewaysRepository;
+use Crm\PaymentsModule\Repositories\PaymentGatewaysRepository;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class PaymentGatewaysSeeder implements ISeeder

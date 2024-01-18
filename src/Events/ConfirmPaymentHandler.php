@@ -3,10 +3,10 @@
 namespace Crm\MobiletechModule\Events;
 
 use Crm\MobiletechModule\Gateways\MobiletechRecurrent;
-use Crm\PaymentsModule\PaymentProcessor;
-use Crm\PaymentsModule\RecurrentPaymentsProcessor;
-use Crm\PaymentsModule\Repository\PaymentsRepository;
-use Crm\PaymentsModule\Repository\RecurrentPaymentsRepository;
+use Crm\PaymentsModule\Models\PaymentProcessor;
+use Crm\PaymentsModule\Models\RecurrentPaymentsProcessor;
+use Crm\PaymentsModule\Repositories\PaymentsRepository;
+use Crm\PaymentsModule\Repositories\RecurrentPaymentsRepository;
 use League\Event\AbstractListener;
 use League\Event\EventInterface;
 

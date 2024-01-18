@@ -5,8 +5,8 @@ namespace Crm\MobiletechModule\Gateways;
 use Crm\ApplicationModule\Hermes\HermesMessage;
 use Crm\MobiletechModule\Events\MobiletechNotificationEnvelope;
 use Crm\MobiletechModule\Events\MobiletechNotificationEvent;
-use Crm\PaymentsModule\GatewayFail;
-use Crm\PaymentsModule\Gateways\RecurrentPaymentInterface;
+use Crm\PaymentsModule\Models\GatewayFail;
+use Crm\PaymentsModule\Models\Gateways\RecurrentPaymentInterface;
 use Nette\Utils\DateTime;
 use Omnipay\Common\Exception\InvalidRequestException;
 

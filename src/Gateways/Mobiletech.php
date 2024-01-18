@@ -8,9 +8,9 @@ use Crm\MobiletechModule\Models\DeliveryStatus;
 use Crm\MobiletechModule\Models\SubscriptionTypeShortName;
 use Crm\MobiletechModule\Repositories\MobiletechInboundMessagesRepository;
 use Crm\MobiletechModule\Repositories\MobiletechOutboundMessagesRepository;
-use Crm\PaymentsModule\GatewayFail;
-use Crm\PaymentsModule\Gateways\PaymentInterface;
-use Crm\PaymentsModule\Repository\PaymentMetaRepository;
+use Crm\PaymentsModule\Models\GatewayFail;
+use Crm\PaymentsModule\Models\Gateways\PaymentInterface;
+use Crm\PaymentsModule\Repositories\PaymentMetaRepository;
 use League\Event\Emitter;
 use Nette\Utils\Json;
 
