@@ -5,7 +5,7 @@ namespace Crm\MobiletechModule\Commands;
 use Crm\MobiletechModule\Events\MobiletechNotificationEvent;
 use Crm\MobiletechModule\Repositories\MobiletechInboundMessagesRepository;
 use Crm\MobiletechModule\Repositories\MobiletechTemplatesRepository;
-use Crm\UsersModule\Repository\UsersRepository;
+use Crm\UsersModule\Repositories\UsersRepository;
 use League\Event\Emitter;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

@@ -5,7 +5,7 @@ namespace Crm\MobiletechModule\Tests;
 use Crm\ApplicationModule\Tests\DatabaseTestCase;
 use Crm\MobiletechModule\Repositories\MobiletechAlreadyExistsException;
 use Crm\MobiletechModule\Repositories\MobiletechPhoneNumbersRepository;
-use Crm\UsersModule\Repository\UsersRepository;
+use Crm\UsersModule\Repositories\UsersRepository;
 use Nette\Database\Table\ActiveRow;
 
 class MobiletechPhoneNumbersRepositoryTest extends DatabaseTestCase

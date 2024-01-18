@@ -4,8 +4,8 @@ namespace Crm\MobiletechModule\Authenticator;
 
 use Crm\ApplicationModule\Authenticator\AuthenticatorInterface;
 use Crm\MobiletechModule\Repositories\MobiletechPhoneNumbersRepository;
-use Crm\UsersModule\Auth\UserAuthenticator;
 use Crm\UsersModule\Events\UserSignInEvent;
+use Crm\UsersModule\Models\Auth\UserAuthenticator;
 use Nette\Database\Table\ActiveRow;
 use Nette\Localization\Translator;
 use Nette\Security\AuthenticationException;
