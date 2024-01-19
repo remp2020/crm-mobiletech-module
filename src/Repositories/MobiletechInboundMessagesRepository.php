@@ -2,7 +2,7 @@
 
 namespace Crm\MobiletechModule\Repositories;
 
-use Crm\ApplicationModule\Repository;
+use Crm\ApplicationModule\Models\Database\Repository;
 use Crm\MobiletechModule\Models\DeliveryStatus;
 use Nette\Caching\Storage;
 use Nette\Database\Explorer;

@@ -2,8 +2,8 @@
 
 namespace Crm\MobiletechModule\Events;
 
-use Crm\ApplicationModule\Config\ApplicationConfig;
 use Crm\ApplicationModule\Hermes\HermesMessage;
+use Crm\ApplicationModule\Models\Config\ApplicationConfig;
 use Crm\MobiletechModule\Models\Config;
 use Crm\MobiletechModule\Models\OperatorTypeResolver;
 use Crm\MobiletechModule\Repositories\MobiletechOutboundMessagesRepository;

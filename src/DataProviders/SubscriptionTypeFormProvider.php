@@ -2,7 +2,7 @@
 
 namespace Crm\MobiletechModule\DataProviders;
 
-use Crm\ApplicationModule\DataProvider\DataProviderException;
+use Crm\ApplicationModule\Models\DataProvider\DataProviderException;
 use Crm\SubscriptionsModule\DataProviders\SubscriptionTypeFormProviderInterface;
 use Crm\SubscriptionsModule\Repositories\SubscriptionTypesMetaRepository;
 use Crm\SubscriptionsModule\Repositories\SubscriptionTypesRepository;

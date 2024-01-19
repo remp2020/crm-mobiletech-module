@@ -4,7 +4,7 @@ namespace Crm\MobiletechModule\Api;
 
 use Crm\ApiModule\Models\Api\ApiHandler;
 use Crm\ApiModule\Models\Token\InternalToken;
-use Crm\ApplicationModule\Config\ApplicationConfig;
+use Crm\ApplicationModule\Models\Config\ApplicationConfig;
 use Crm\MobiletechModule\Models\Config;
 use GuzzleHttp\Client;
 use Tomaj\NetteApi\Response\ResponseInterface;

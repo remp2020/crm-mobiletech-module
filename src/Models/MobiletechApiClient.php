@@ -3,7 +3,7 @@
 namespace Crm\MobiletechModule\Models;
 
 use Crm\ApiModule\Models\Token\InternalToken;
-use Crm\ApplicationModule\Config\ApplicationConfig;
+use Crm\ApplicationModule\Models\Config\ApplicationConfig;
 use Crm\MobiletechModule\Repositories\MobiletechOutboundMessagesRepository;
 use GuzzleHttp\Client;
 use Nette\Database\Table\ActiveRow;

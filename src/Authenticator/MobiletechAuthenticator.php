@@ -2,7 +2,7 @@
 
 namespace Crm\MobiletechModule\Authenticator;
 
-use Crm\ApplicationModule\Authenticator\AuthenticatorInterface;
+use Crm\ApplicationModule\Models\Authenticator\AuthenticatorInterface;
 use Crm\MobiletechModule\Repositories\MobiletechPhoneNumbersRepository;
 use Crm\UsersModule\Events\UserSignInEvent;
 use Crm\UsersModule\Models\Auth\UserAuthenticator;

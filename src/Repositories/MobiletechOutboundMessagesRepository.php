@@ -2,7 +2,7 @@
 
 namespace Crm\MobiletechModule\Repositories;
 
-use Crm\ApplicationModule\Repository;
+use Crm\ApplicationModule\Models\Database\Repository;
 use Crm\MobiletechModule\Events\OutboundMessageStatusUpdatedEvent;
 use Crm\MobiletechModule\Models\DeliveryStatus;
 use League\Event\Emitter;
