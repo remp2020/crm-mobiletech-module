@@ -2,8 +2,10 @@
 
 namespace Crm\MobiletechModule\Events;
 
+use Contributte\Translation\Translator;
 use Crm\ApplicationModule\Hermes\HermesMessage;
 use Crm\ApplicationModule\Models\Config\ApplicationConfig;
+use Crm\ApplicationModule\Twig\Extensions\ContributteTranslationExtension;
 use Crm\MobiletechModule\Models\Config;
 use Crm\MobiletechModule\Models\OperatorTypeResolver;
 use Crm\MobiletechModule\Repositories\MobiletechOutboundMessagesRepository;
@@ -18,32 +20,15 @@ use Twig\Loader\ArrayLoader;
 
 class NotificationHandler extends AbstractListener
 {
-    private $hermesEmitter;
-
-    private $mobiletechPhoneNumbersRepository;
-
-    private $mobiletechTemplatesRepository;
-
-    private $mobiletechOutboundMessagesRepository;
-
-    private $applicationConfig;
-
-    private $operatorTypeResolver;
-
     public function __construct(
-        Emitter $hermesEmitter,
-        MobiletechPhoneNumbersRepository $mobiletechPhoneNumbersRepository,
-        MobiletechTemplatesRepository $mobiletechTemplatesRepository,
-        MobiletechOutboundMessagesRepository $mobiletechOutboundMessagesRepository,
-        ApplicationConfig $applicationConfig,
-        OperatorTypeResolver $operatorTypeResolver
+        private readonly Emitter $hermesEmitter,
+        private readonly MobiletechPhoneNumbersRepository $mobiletechPhoneNumbersRepository,
+        private readonly MobiletechTemplatesRepository $mobiletechTemplatesRepository,
+        private readonly MobiletechOutboundMessagesRepository $mobiletechOutboundMessagesRepository,
+        private readonly ApplicationConfig $applicationConfig,
+        private readonly OperatorTypeResolver $operatorTypeResolver,
+        private readonly Translator $translator,
     ) {
-        $this->hermesEmitter = $hermesEmitter;
-        $this->mobiletechPhoneNumbersRepository = $mobiletechPhoneNumbersRepository;
-        $this->mobiletechTemplatesRepository = $mobiletechTemplatesRepository;
-        $this->mobiletechOutboundMessagesRepository = $mobiletechOutboundMessagesRepository;
-        $this->applicationConfig = $applicationConfig;
-        $this->operatorTypeResolver = $operatorTypeResolver;
     }
 
     public function handle(EventInterface $event)
@@ -169,6 +154,7 @@ class NotificationHandler extends AbstractListener
             'template' => $templateContent,
         ]);
         $twig = new Environment($loader);
+        $twig->addExtension(new ContributteTranslationExtension($this->translator));
         return $twig->render('template', $params);
     }
 }
