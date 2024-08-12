@@ -150,7 +150,7 @@ class MobiletechAuthenticatorTest extends DatabaseTestCase
                     'mobile_phone' => self::PHONE_NUMBER,
                     'password' => self::PASSWORD_INCORRECT,
                 ],
-                'auth_exception_code' => UserAuthenticator::INVALID_CREDENTIAL,
+                'authExceptionCode' => UserAuthenticator::INVALID_CREDENTIAL,
             ],
             // invalid only phone number
             [
@@ -158,7 +158,7 @@ class MobiletechAuthenticatorTest extends DatabaseTestCase
                     'mobile_phone' => self::PHONE_NUMBER_INCORRECT,
                     'password' => self::PASSWORD
                 ],
-                'auth_exception_code' => UserAuthenticator::IDENTITY_NOT_FOUND,
+                'authExceptionCode' => UserAuthenticator::IDENTITY_NOT_FOUND,
             ],
             // invalid both
             [
@@ -166,7 +166,7 @@ class MobiletechAuthenticatorTest extends DatabaseTestCase
                     'mobile_phone' => self::PHONE_NUMBER_INCORRECT,
                     'password' => self::PASSWORD_INCORRECT
                 ],
-                'auth_exception_code' => UserAuthenticator::IDENTITY_NOT_FOUND,
+                'authExceptionCode' => UserAuthenticator::IDENTITY_NOT_FOUND,
             ],
         ];
     }
