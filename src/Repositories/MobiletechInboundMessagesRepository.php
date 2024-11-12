@@ -3,22 +3,11 @@
 namespace Crm\MobiletechModule\Repositories;
 
 use Crm\ApplicationModule\Models\Database\Repository;
-use Crm\MobiletechModule\Models\DeliveryStatus;
-use Nette\Caching\Storage;
-use Nette\Database\Explorer;
 use Nette\Database\Table\ActiveRow;
 
 class MobiletechInboundMessagesRepository extends Repository
 {
     protected $tableName = 'mobiletech_inbound_messages';
-
-    private $deliveryStatus;
-
-    public function __construct(Explorer $database, DeliveryStatus $deliveryStatus, Storage $cacheStorage = null)
-    {
-        parent::__construct($database, $cacheStorage);
-        $this->deliveryStatus = $deliveryStatus;
-    }
 
     final public function add(
         ?ActiveRow $user,
