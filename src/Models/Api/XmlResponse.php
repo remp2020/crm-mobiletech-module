@@ -24,25 +24,9 @@ class XmlResponse implements ApiResponseInterface
         $this->rootElementAttributes = $rootElementAttributes;
     }
 
-    /**
-     * @deprecated use getCode()
-     */
-    public function getHttpCode()
-    {
-        return $this->getCode();
-    }
-
     public function getCode(): int
     {
         return $this->code;
-    }
-
-    /**
-     * @deprecated use setCode()
-     */
-    public function setHttpCode($httpCode)
-    {
-        $this->setCode($httpCode);
     }
 
     public function setCode(int $code)
