@@ -3,9 +3,9 @@
 namespace Crm\MobiletechModule\Events;
 
 use Crm\MobiletechModule\Gateways\MobiletechRecurrent;
+use Crm\PaymentsModule\Models\Payment\PaymentStatusEnum;
 use Crm\PaymentsModule\Models\PaymentProcessor;
 use Crm\PaymentsModule\Models\RecurrentPaymentsProcessor;
-use Crm\PaymentsModule\Repositories\PaymentsRepository;
 use Crm\PaymentsModule\Repositories\RecurrentPaymentsRepository;
 use League\Event\AbstractListener;
 use League\Event\EventInterface;
@@ -50,7 +50,7 @@ class ConfirmPaymentHandler extends AbstractListener
             if ($success) {
                 $this->recurrentPaymentsProcessor->processChargedRecurrent(
                     $recurrentPayment,
-                    PaymentsRepository::STATUS_PAID,
+                    PaymentStatusEnum::Paid->value,
                     $outboundMessage->status,
                     $outboundMessage->status
                 );
