@@ -3,6 +3,7 @@
 namespace Crm\MobiletechModule\Hermes;
 
 use Crm\MobiletechModule\Repositories\MobiletechOutboundMessagesRepository;
+use Crm\PaymentsModule\Models\RecurrentPayment\RecurrentPaymentStateEnum;
 use Crm\PaymentsModule\Models\RecurrentPaymentsProcessor;
 use Crm\PaymentsModule\Repositories\PaymentsRepository;
 use Crm\PaymentsModule\Repositories\RecurrentPaymentsRepository;
@@ -54,7 +55,7 @@ class PendingChargeTimeoutHandler implements HandlerInterface
         }
 
         $recurrentPayment = $this->recurrentPaymentsRepository->findByPayment($payment);
-        if ($recurrentPayment->status !== RecurrentPaymentsRepository::STATE_PENDING) {
+        if ($recurrentPayment->status !== RecurrentPaymentStateEnum::Pending->value) {
             // pending state has already been resolved
             return true;
         }
