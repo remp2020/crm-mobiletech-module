@@ -57,7 +57,7 @@ class Mobiletech implements PaymentInterface
         MobiletechInboundMessagesRepository $mobiletechInboundMessagesRepository,
         MobiletechOutboundMessagesRepository $mobiletechOutboundMessagesRepository,
         DeliveryStatus $deliveryStatus,
-        SubscriptionTypeShortName $subscriptionTypeShortName
+        SubscriptionTypeShortName $subscriptionTypeShortName,
     ) {
         $this->emitter = $emitter;
         $this->hermesEmitter = $hermesEmitter;
@@ -108,7 +108,7 @@ class Mobiletech implements PaymentInterface
             $this->payment->user,
             $this->templateCode,
             $this->params,
-            $this->getContext($this->payment)
+            $this->getContext($this->payment),
         );
         $event = $this->emitter->emit($event);
 

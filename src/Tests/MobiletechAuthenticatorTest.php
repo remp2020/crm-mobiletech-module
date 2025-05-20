@@ -59,7 +59,7 @@ class MobiletechAuthenticatorTest extends DatabaseTestCase
         $user = $this->loadUser(
             self::EMAIL,
             self::PASSWORD,
-            self::PHONE_NUMBER
+            self::PHONE_NUMBER,
         );
         $this->mobiletechAuthenticator->setCredentials($credentials);
 
@@ -88,7 +88,7 @@ class MobiletechAuthenticatorTest extends DatabaseTestCase
         // no user seeded
         $credentials = [
             'mobile_phone' => self::PHONE_NUMBER,
-            'password' => self::PASSWORD
+            'password' => self::PASSWORD,
         ];
         $this->mobiletechAuthenticator->setCredentials($credentials);
 
@@ -132,7 +132,7 @@ class MobiletechAuthenticatorTest extends DatabaseTestCase
         $user = $this->loadUser(
             self::EMAIL,
             self::PASSWORD,
-            self::PHONE_NUMBER
+            self::PHONE_NUMBER,
         );
         $this->mobiletechAuthenticator->setCredentials($credentials);
 
@@ -156,7 +156,7 @@ class MobiletechAuthenticatorTest extends DatabaseTestCase
             [
                 [
                     'mobile_phone' => self::PHONE_NUMBER_INCORRECT,
-                    'password' => self::PASSWORD
+                    'password' => self::PASSWORD,
                 ],
                 'authExceptionCode' => UserAuthenticator::IDENTITY_NOT_FOUND,
             ],
@@ -164,7 +164,7 @@ class MobiletechAuthenticatorTest extends DatabaseTestCase
             [
                 [
                     'mobile_phone' => self::PHONE_NUMBER_INCORRECT,
-                    'password' => self::PASSWORD_INCORRECT
+                    'password' => self::PASSWORD_INCORRECT,
                 ],
                 'authExceptionCode' => UserAuthenticator::IDENTITY_NOT_FOUND,
             ],

@@ -47,7 +47,7 @@ class MobiletechPhoneNumbersRepositoryTest extends DatabaseTestCase
 
         $this->user = $this->loadUser(
             self::EMAIL,
-            self::PASSWORD
+            self::PASSWORD,
         );
     }
 

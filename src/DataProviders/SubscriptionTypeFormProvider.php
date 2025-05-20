@@ -21,7 +21,7 @@ class SubscriptionTypeFormProvider implements SubscriptionTypeFormProviderInterf
 
     public function __construct(
         SubscriptionTypesRepository $subscriptionTypesRepository,
-        SubscriptionTypesMetaRepository $subscriptionTypesMetaRepository
+        SubscriptionTypesMetaRepository $subscriptionTypesMetaRepository,
     ) {
         $this->subscriptionTypesMetaRepository = $subscriptionTypesMetaRepository;
         $this->subscriptionTypesRepository = $subscriptionTypesRepository;

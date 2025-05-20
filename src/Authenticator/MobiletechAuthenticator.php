@@ -31,7 +31,7 @@ class MobiletechAuthenticator implements AuthenticatorInterface
     public function __construct(
         MobiletechPhoneNumbersRepository $mobiletechPhoneNumbersRepository,
         Translator $translator,
-        Passwords $passwords
+        Passwords $passwords,
     ) {
         $this->mobiletechPhoneNumbersRepository = $mobiletechPhoneNumbersRepository;
         $this->translator = $translator;

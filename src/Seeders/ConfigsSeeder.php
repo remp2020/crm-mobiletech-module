@@ -28,7 +28,7 @@ class ConfigsSeeder implements ISeeder
         ConfigCategoriesRepository $configCategoriesRepository,
         ConfigsRepository $configsRepository,
         ConfigBuilder $configBuilder,
-        Connection $database
+        Connection $database,
     ) {
         $this->configCategoriesRepository = $configCategoriesRepository;
         $this->configsRepository = $configsRepository;
@@ -55,7 +55,7 @@ class ConfigsSeeder implements ISeeder
             'mobiletech.config.' . Config::GATEWAY_URL_PRODUCTION . '.name',
             'mobiletech.config.' . Config::GATEWAY_URL_PRODUCTION . '.description',
             '',
-            2500
+            2500,
         );
 
         $this->addConfig(
@@ -66,7 +66,7 @@ class ConfigsSeeder implements ISeeder
             'mobiletech.config.' . Config::GATEWAY_URL_TEST . '.name',
             'mobiletech.config.' . Config::GATEWAY_URL_TEST . '.description',
             '',
-            2501
+            2501,
         );
 
         $this->addConfig(
@@ -77,7 +77,7 @@ class ConfigsSeeder implements ISeeder
             'mobiletech.config.' . Config::BILLKEY_FREE . '.name',
             'mobiletech.config.' . Config::BILLKEY_FREE . '.description',
             '',
-            2501
+            2501,
         );
     }
 }

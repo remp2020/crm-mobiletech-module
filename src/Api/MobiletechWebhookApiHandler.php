@@ -56,7 +56,7 @@ class MobiletechWebhookApiHandler extends ApiHandler
         MobiletechInboundMessagesRepository $mobiletechInboundMessagesRepository,
         MobiletechOutboundMessagesRepository $mobiletechOutboundMessagesRepository,
         MobiletechPhoneNumbersRepository $mobiletechPhoneNumbersRepository,
-        Emitter $emitter
+        Emitter $emitter,
     ) {
         $this->mobiletechInboundMessagesRepository = $mobiletechInboundMessagesRepository;
         $this->mobiletechOutboundMessagesRepository = $mobiletechOutboundMessagesRepository;
@@ -104,7 +104,7 @@ class MobiletechWebhookApiHandler extends ApiHandler
                 $payload->dcs,
                 $payload->esm,
                 $payload->operator_type,
-                $receiveDate
+                $receiveDate,
             );
         }
 

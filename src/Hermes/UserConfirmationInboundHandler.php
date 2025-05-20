@@ -19,7 +19,7 @@ class UserConfirmationInboundHandler implements HandlerInterface
     public function __construct(
         MobiletechInboundMessagesRepository $mobiletechInboundMessagesRepository,
         UserManager $userManager,
-        UsersRepository $usersRepository
+        UsersRepository $usersRepository,
     ) {
         $this->mobiletechInboundMessagesRepository = $mobiletechInboundMessagesRepository;
         $this->userManager = $userManager;

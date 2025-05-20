@@ -20,7 +20,7 @@ class OperatorTypeResolver
 
     public function __construct(
         MobiletechInboundMessagesRepository $mobiletechInboundMessagesRepository,
-        MobiletechOutboundMessagesRepository $mobiletechOutboundMessagesRepository
+        MobiletechOutboundMessagesRepository $mobiletechOutboundMessagesRepository,
     ) {
         $this->mobiletechInboundMessagesRepository = $mobiletechInboundMessagesRepository;
         $this->mobiletechOutboundMessagesRepository = $mobiletechOutboundMessagesRepository;

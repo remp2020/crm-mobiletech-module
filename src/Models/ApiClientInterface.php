@@ -8,6 +8,6 @@ interface ApiClientInterface
 {
     public function send(
         ActiveRow $mobiletechOutboundMessage,
-        string $content
+        string $content,
     );
 }

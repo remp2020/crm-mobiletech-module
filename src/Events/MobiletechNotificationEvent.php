@@ -25,7 +25,7 @@ class MobiletechNotificationEvent extends NotificationEvent
         string $templateCode,
         array $params = [],
         string $context = null,
-        \DateTime $scheduleAt = null
+        \DateTime $scheduleAt = null,
     ) {
         $this->mobiletechEnvelope = $mobiletechEnvelope;
         parent::__construct(
@@ -35,7 +35,7 @@ class MobiletechNotificationEvent extends NotificationEvent
             $params,
             $context,
             [],
-            $scheduleAt
+            $scheduleAt,
         );
     }
 

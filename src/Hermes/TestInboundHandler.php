@@ -75,7 +75,7 @@ class TestInboundHandler implements HandlerInterface
             $template->code,
             [
                 'original_message' => $inboundMessage->content,
-            ]
+            ],
         ));
 
         return true;

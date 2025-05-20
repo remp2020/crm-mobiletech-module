@@ -26,7 +26,7 @@ class TestNotificationCommand extends Command
         Emitter $emitter,
         UsersRepository $usersRepository,
         MobiletechTemplatesRepository $mobiletechTemplatesRepository,
-        MobiletechInboundMessagesRepository $mobiletechInboundMessagesRepository
+        MobiletechInboundMessagesRepository $mobiletechInboundMessagesRepository,
     ) {
         parent::__construct();
         $this->emitter = $emitter;
@@ -43,25 +43,25 @@ class TestNotificationCommand extends Command
                 'user_id',
                 null,
                 InputOption::VALUE_REQUIRED,
-                'User ID with mobiletech phone number'
+                'User ID with mobiletech phone number',
             )
             ->addOption(
                 'bill_key',
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Bill key used to send message'
+                'Bill key used to send message',
             )
             ->addOption(
                 'template_code',
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Mobiletech template to be sent'
+                'Mobiletech template to be sent',
             )
             ->addOption(
                 'inbound_message_id',
                 null,
                 InputOption::VALUE_REQUIRED,
-                "ID of inbound message you're trying respond to"
+                "ID of inbound message you're trying respond to",
             );
     }
 
@@ -109,7 +109,7 @@ class TestNotificationCommand extends Command
             $inboundMessage,
             $billKey,
             $user,
-            $template->code
+            $template->code,
         ));
 
         return Command::SUCCESS;

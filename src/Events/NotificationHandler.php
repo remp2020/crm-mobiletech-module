@@ -129,7 +129,7 @@ class NotificationHandler extends AbstractListener
             $expiration,
             null,
             null,
-            $operatorType
+            $operatorType,
         );
         if ($event instanceof MobiletechNotificationEvent) {
             $event->setMobiletechOutboundMessage($mobiletechOutboundMessage);

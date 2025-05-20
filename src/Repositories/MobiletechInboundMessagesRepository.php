@@ -21,7 +21,7 @@ class MobiletechInboundMessagesRepository extends Repository
         string $dcs,
         string $esm,
         string $operatorType,
-        \DateTime $receiveDate
+        \DateTime $receiveDate,
     ) {
         return $this->insert([
             'user_id' => $user->id ?? null,
@@ -37,7 +37,7 @@ class MobiletechInboundMessagesRepository extends Repository
             'operator_type' => $operatorType,
             'receive_date' => $receiveDate,
             'created_at' => new \DateTime(),
-            'updated_at' => new \DateTime()
+            'updated_at' => new \DateTime(),
         ]);
     }
 

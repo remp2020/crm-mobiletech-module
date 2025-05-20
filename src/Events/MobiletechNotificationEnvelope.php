@@ -25,7 +25,7 @@ class MobiletechNotificationEnvelope
         ?string $billKey = null,
         ?string $servId = null,
         ?string $fromShortNumber = null,
-        ?string $toPhoneNumber = null
+        ?string $toPhoneNumber = null,
     ) {
         if ($servId) {
             $this->servId = $servId;

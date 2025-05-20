@@ -22,7 +22,7 @@ class MobiletechOutboundMessagesRepository extends Repository
         Explorer $database,
         Storage $cacheStorage,
         Emitter $emitter,
-        DeliveryStatus $deliveryStatus
+        DeliveryStatus $deliveryStatus,
     ) {
         parent::__construct($database, $cacheStorage);
         $this->emitter = $emitter;
@@ -43,7 +43,7 @@ class MobiletechOutboundMessagesRepository extends Repository
         int $expiration,
         ?string $dcs,
         ?string $esm,
-        string $operatorType
+        string $operatorType,
     ) {
         return $this->insert([
             'user_id' => $user->id ?? null,
@@ -61,7 +61,7 @@ class MobiletechOutboundMessagesRepository extends Repository
             'esm' => $esm,
             'operator_type' => $operatorType,
             'created_at' => new \DateTime(),
-            'updated_at' => new \DateTime()
+            'updated_at' => new \DateTime(),
         ]);
     }
 

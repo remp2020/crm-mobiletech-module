@@ -24,7 +24,7 @@ class ConfirmPaymentHandler extends AbstractListener
         PaymentProcessor $paymentProcessor,
         RecurrentPaymentsProcessor $recurrentPaymentsProcessor,
         RecurrentPaymentsRepository $recurrentPaymentsRepository,
-        MobiletechRecurrent $mobiletechRecurrent
+        MobiletechRecurrent $mobiletechRecurrent,
     ) {
         $this->paymentProcessor = $paymentProcessor;
         $this->recurrentPaymentsProcessor = $recurrentPaymentsProcessor;
@@ -52,13 +52,13 @@ class ConfirmPaymentHandler extends AbstractListener
                     $recurrentPayment,
                     PaymentStatusEnum::Paid->value,
                     $outboundMessage->status,
-                    $outboundMessage->status
+                    $outboundMessage->status,
                 );
             } else {
                 $this->recurrentPaymentsProcessor->processFailedRecurrent(
                     $recurrentPayment,
                     $outboundMessage->status,
-                    $outboundMessage->status
+                    $outboundMessage->status,
                 );
             }
         } else {

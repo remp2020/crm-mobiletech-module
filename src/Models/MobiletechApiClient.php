@@ -23,7 +23,7 @@ class MobiletechApiClient implements ApiClientInterface
 
     public function __construct(
         ApplicationConfig $applicationConfig,
-        MobiletechOutboundMessagesRepository $mobiletechOutboundMessagesRepository
+        MobiletechOutboundMessagesRepository $mobiletechOutboundMessagesRepository,
     ) {
         $this->applicationConfig = $applicationConfig;
         $this->mobiletechOutboundMessagesRepository = $mobiletechOutboundMessagesRepository;
@@ -31,7 +31,7 @@ class MobiletechApiClient implements ApiClientInterface
 
     public function send(
         ActiveRow $mobiletechOutboundMessage,
-        string $content
+        string $content,
     ) {
 
         $message = [
@@ -52,7 +52,7 @@ class MobiletechApiClient implements ApiClientInterface
         $xml = ArrayToXml::convert($message, [
             'rootElementName' => 'message',
             '_attributes' => [
-                'command' => 'send'
+                'command' => 'send',
             ],
         ], true, 'UTF-8');
 

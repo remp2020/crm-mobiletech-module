@@ -36,17 +36,17 @@ class MobiletechModule extends CrmModule
     {
         $authenticatorManager->registerAuthenticator(
             $this->getInstance(MobiletechAuthenticator::class),
-            200
+            200,
         );
     }
 
     public function registerApiCalls(ApiRoutersContainerInterface $apiRoutersContainer)
     {
         $apiRoutersContainer->attachRouter(
-            new ApiRoute(new ApiIdentifier('1', 'mobiletech', 'webhook'), MobiletechWebhookApiHandler::class, NoAuthorization::class)
+            new ApiRoute(new ApiIdentifier('1', 'mobiletech', 'webhook'), MobiletechWebhookApiHandler::class, NoAuthorization::class),
         );
         $apiRoutersContainer->attachRouter(
-            new ApiRoute(new ApiIdentifier('1', 'mobiletech', 'server-proxy'), MobiletechServerProxyApiHandler::class, BearerTokenAuthorization::class)
+            new ApiRoute(new ApiIdentifier('1', 'mobiletech', 'server-proxy'), MobiletechServerProxyApiHandler::class, BearerTokenAuthorization::class),
         );
     }
 
@@ -60,15 +60,15 @@ class MobiletechModule extends CrmModule
     {
         $emitter->addListener(
             NotificationEvent::class,
-            NotificationHandler::class
+            NotificationHandler::class,
         );
         $emitter->addListener(
             MobiletechNotificationEvent::class,
-            NotificationHandler::class
+            NotificationHandler::class,
         );
         $emitter->addListener(
             OutboundMessageStatusUpdatedEvent::class,
-            ConfirmPaymentHandler::class
+            ConfirmPaymentHandler::class,
         );
     }
 
@@ -76,15 +76,15 @@ class MobiletechModule extends CrmModule
     {
         $dispatcher->registerHandler(
             'mobiletech-send',
-            $this->getInstance(SendHandler::class)
+            $this->getInstance(SendHandler::class),
         );
         $dispatcher->registerHandler(
             'mobiletech-pending-charge-timeout',
-            $this->getInstance(PendingChargeTimeoutHandler::class)
+            $this->getInstance(PendingChargeTimeoutHandler::class),
         );
         $dispatcher->registerHandler(
             'mobiletech-inbound',
-            $this->getInstance(UserConfirmationInboundHandler::class)
+            $this->getInstance(UserConfirmationInboundHandler::class),
         );
     }
 
@@ -97,7 +97,7 @@ class MobiletechModule extends CrmModule
     {
         $dataProviderManager->registerDataProvider(
             'subscriptions.dataprovider.subscription_type_form',
-            $this->getInstance(SubscriptionTypeFormProvider::class)
+            $this->getInstance(SubscriptionTypeFormProvider::class),
         );
     }
 }

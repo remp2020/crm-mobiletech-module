@@ -26,7 +26,7 @@ class PendingChargeTimeoutHandler implements HandlerInterface
         MobiletechOutboundMessagesRepository $mobiletechOutboundMessagesRepository,
         PaymentsRepository $paymentsRepository,
         RecurrentPaymentsRepository $recurrentPaymentsRepository,
-        RecurrentPaymentsProcessor $recurrentPaymentsProcessor
+        RecurrentPaymentsProcessor $recurrentPaymentsProcessor,
     ) {
         $this->mobiletechOutboundMessagesRepository = $mobiletechOutboundMessagesRepository;
         $this->paymentsRepository = $paymentsRepository;
@@ -63,7 +63,7 @@ class PendingChargeTimeoutHandler implements HandlerInterface
         $this->recurrentPaymentsProcessor->processFailedRecurrent(
             $recurrentPayment,
             $outboundMessage->status,
-            $outboundMessage->status
+            $outboundMessage->status,
         );
 
         return true;

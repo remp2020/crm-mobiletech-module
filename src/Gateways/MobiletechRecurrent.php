@@ -38,7 +38,7 @@ class MobiletechRecurrent extends Mobiletech implements RecurrentPaymentInterfac
                 $originalOutboundMessage->billkey,
                 $originalInboundMessage->serv_id,
                 $originalInboundMessage->to,
-                $originalInboundMessage->from
+                $originalInboundMessage->from,
             ),
             $payment->user,
             $originalOutboundMessage->mobiletech_template->code,
@@ -46,7 +46,7 @@ class MobiletechRecurrent extends Mobiletech implements RecurrentPaymentInterfac
                 'subscription_name' => $this->subscriptionTypeShortName->getShortName($payment->subscription_type),
                 'price' => (int) $payment->subscription_type->price,
             ],
-            $this->getContext($payment)
+            $this->getContext($payment),
         );
         $event = $this->emitter->emit($event);
 

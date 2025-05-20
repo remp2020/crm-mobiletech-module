@@ -17,7 +17,7 @@ class SendHandler implements HandlerInterface
 
     public function __construct(
         ApiClientInterface $mobiletechApiClient,
-        MobiletechOutboundMessagesRepository $mobiletechOutboundMessagesRepository
+        MobiletechOutboundMessagesRepository $mobiletechOutboundMessagesRepository,
     ) {
         $this->mobiletechApiClient = $mobiletechApiClient;
         $this->mobiletechOutboundMessagesRepository = $mobiletechOutboundMessagesRepository;
@@ -51,7 +51,7 @@ class SendHandler implements HandlerInterface
 
         $this->mobiletechApiClient->send(
             $outboundMessage,
-            $content
+            $content,
         );
 
         return true;
